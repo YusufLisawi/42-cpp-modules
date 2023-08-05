@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 15:03:59 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/05 17:32:52 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:53:33 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <iostream>
 # include <iomanip>
-# include <string>
 
 class Contact {
     private:
