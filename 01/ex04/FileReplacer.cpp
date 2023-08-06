@@ -5,12 +5,12 @@
 FileReplacer::FileReplacer(std::string filename, std::string s1, std::string s2) 
 : filename(filename), s1(s1), s2(s2)
 {
-	std::cout << "FileReplacer constructed" << std::endl;
 }
 
-FileReplacer::~FileReplacer() {
-	std::cout << "FileReplacer destructed" << std::endl;
+FileReplacer::~FileReplacer()
+{
 }
+
 bool FileReplacer::replace() {
     std::ifstream inFile(this->filename);
     if (!inFile) {

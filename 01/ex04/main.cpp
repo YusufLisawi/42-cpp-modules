@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 19:58:40 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/06 19:59:46 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:02:25 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 	}
 
 	FileReplacer replacer(argv[1], argv[2], argv[3]);
-	replacer.replace();
-
+	if (!replacer.replace())
+		return (1);
 	return (0);
 }
 
