@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FileReplacer.cpp                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/08 11:18:29 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/08 11:18:30 by yelaissa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "FileReplacer.hpp"
 #include <iostream>
 #include <fstream>
@@ -27,22 +39,16 @@ bool FileReplacer::replace() {
 
     std::string line;
     while (std::getline(inFile, line)) {
-        std::string newLine;
         size_t pos = 0;
-        while (pos < line.length()) {
-            size_t foundPos = line.find(this->s1, pos);
-            if (foundPos == std::string::npos) {
-                newLine += line.substr(pos);
-                break;
-            }
-            newLine += line.substr(pos, foundPos - pos);
-            newLine += this->s2;
-            pos = foundPos + this->s1.length();
+        while ((pos = line.find(this->s1, pos)) != std::string::npos) {
+            line.erase(pos, this->s1.length());
+            line.insert(pos, this->s2);
+            pos += this->s2.length();
         }
-        if (inFile.eof() && line.empty() == false)
-            outFile << newLine;
+        if (inFile.eof() && !line.empty())
+            outFile << line;
         else
-            outFile << newLine << std::endl;
+            outFile << line << std::endl;
     }
 
     inFile.close();

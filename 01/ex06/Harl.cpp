@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/08 11:18:48 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/08 11:18:49 by yelaissa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Harl.hpp"
 
 void    Harl::debug(void)
@@ -35,13 +47,10 @@ void    Harl::complain(std::string level)
     {
         case 0:
             this->debug();
-            break;
         case 1:
             this->info();
-            break;
         case 2:
             this->warning();
-            break;
         case 3:
             this->error();
             break;
