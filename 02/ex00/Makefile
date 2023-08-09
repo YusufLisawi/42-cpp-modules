@@ -1,6 +1,6 @@
-NAME = Fixed
+NAME = fixed
 
-SRCS = 
+SRCS = main.cpp Fixed.cpp 
 
 OBJS = $(SRCS:.cpp=.o)
 
