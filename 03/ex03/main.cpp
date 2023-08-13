@@ -5,29 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 23:11:58 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/13 23:11:59 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/08/13 23:15:22 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/13 23:23:17 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main()
 {
-    FragTrap frag1("Goku");
-    FragTrap frag2("Vegeta");
+    
+    DiamondTrap yusuf("Yusuf");
+    DiamondTrap isawi("Isawi");
+    
+    yusuf.attack(isawi.getName());
+    isawi.takeDamage(50);
+    isawi.beRepaired(22);
+    isawi.attack(yusuf.getName());
+    yusuf.takeDamage(69);
+    yusuf.highFivesGuys();
+    isawi.guardGate();
+    yusuf.whoAmI();
 
-
-    frag1.attack(frag2.getName());
-    frag2.takeDamage(30);
-    frag2.beRepaired(5);
-
-    frag2.attack(frag1.getName());
-    frag1.takeDamage(30);
-    frag1.beRepaired(15);
-
-    frag1.highFivesGuys();
-    frag2.highFivesGuys();
-
-    return 0;
+    return (0);
 }

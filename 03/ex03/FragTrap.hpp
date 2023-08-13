@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 23:11:58 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/13 23:11:59 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/08/13 21:44:19 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/13 23:01:24 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#pragma once
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
-int main()
+# include "ClapTrap.hpp"
+
+class FragTrap : virtual public ClapTrap
 {
-    FragTrap frag1("Goku");
-    FragTrap frag2("Vegeta");
+public:
+	FragTrap();
+	FragTrap(std::string name);
+	~FragTrap();
+	FragTrap(const FragTrap& other);
+	FragTrap& operator=(const FragTrap& other);
 
+	void	attack(std::string const &target);
+	void	highFivesGuys(void);
+};
 
-    frag1.attack(frag2.getName());
-    frag2.takeDamage(30);
-    frag2.beRepaired(5);
-
-    frag2.attack(frag1.getName());
-    frag1.takeDamage(30);
-    frag1.beRepaired(15);
-
-    frag1.highFivesGuys();
-    frag2.highFivesGuys();
-
-    return 0;
-}
+#endif

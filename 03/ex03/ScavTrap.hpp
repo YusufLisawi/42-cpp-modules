@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 23:11:58 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/13 23:11:59 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/08/13 21:44:19 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/13 23:01:30 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#pragma once
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
-int main()
+#include "ClapTrap.hpp"
+
+class ScavTrap : virtual public ClapTrap
 {
-    FragTrap frag1("Goku");
-    FragTrap frag2("Vegeta");
+public:
+	ScavTrap();
+	ScavTrap(std::string name);
+	~ScavTrap();
+	ScavTrap(const ScavTrap& other);
+	ScavTrap& operator=(const ScavTrap& other);
 
+	void	attack(std::string const &target);
+	void	guardGate();
+};
 
-    frag1.attack(frag2.getName());
-    frag2.takeDamage(30);
-    frag2.beRepaired(5);
-
-    frag2.attack(frag1.getName());
-    frag1.takeDamage(30);
-    frag1.beRepaired(15);
-
-    frag1.highFivesGuys();
-    frag2.highFivesGuys();
-
-    return 0;
-}
+#endif
