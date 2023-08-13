@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:00:13 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/09 15:53:08 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/13 20:34:18 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ class Fixed
 		int toInt(void) const;
 };
 
-std::ostream& operator<<(std::ostream& out,const Fixed& other);
+std::ostream &operator<<(std::ostream &out,const Fixed &other);
 
 #endif
