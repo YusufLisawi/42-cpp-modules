@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   DiamondondTrap.cpp                                    :+:      :+:    :+:   */
@@ -53,13 +53,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
 
 void	DiamondTrap::attack(std::string const &target) 
 {
-	if (this->energyPoints > 0 && this->hitPoints > 0)
-	{
-		std::cout << "DiamondTrap " << this->name << " attack " << target << ", causing (" << this->attackDamage << ") points of damage!" << std::endl;
-		this->energyPoints--;
-	}
-	else
-		std::cout << "DiamondTrap " << this->name << " cannot attack " << target << std::endl;
+	ScavTrap::attack(target);
 }
 
 void	DiamondTrap::whoAmI()
