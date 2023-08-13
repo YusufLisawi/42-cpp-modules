@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:05:53 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/13 22:18:41 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/13 22:18:31 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,6 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 std::string	ClapTrap::getName()
 {
 	return this->name;
-}
-
-void	ClapTrap::setAttackDamage(unsigned int amount)
-{
-	this->attackDamage = amount;
 }
 
 std::ostream &operator<<(std::ostream &out, ClapTrap &other)
