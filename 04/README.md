@@ -92,19 +92,6 @@ An abstract class in C++ is a class that cannot be instantiated directly and is 
 
 3. **Hide Details**: Keep the inner workings of the class hidden by marking data members as `private`. This prevents direct access from outside the class and ensures controlled interaction.
 
-```mermaid
-classDiagram
-  class Abstraction {
-    +definePublicInterface()
-    +hideDetails()
-  }
-  class ConcreteClass {
-    -privateData
-    +publicMethod()
-  }
-  Abstraction --|> ConcreteClass
-```
-
 In summary, abstraction in C++ allows us to create simplified models of real-world concepts, hide complexity, and provide a clear public interface. By using well-defined classes and methods, we can build code that's easier to understand, maintain, and extend. Remember to keep your classes focused, use access modifiers wisely, and document your code for others to use effectively.
 
 ### Example: Abstraction with Public Interface
