@@ -1,3 +1,10 @@
+## Table of Contents
+- [Polymorphism](#polymorphism)
+- [Abstraction](#abstraction)
+- [Interface](#interface)
+
+---
+
 ## Polymorphism
 
 Polymorphism in C++ is a powerful concept that allows objects of different classes to be treated as objects of a common base class. It enables you to write code that can work with objects in a more general and flexible way, regardless of their specific types. This is achieved through the use of virtual functions and pointers or references to base class objects.
