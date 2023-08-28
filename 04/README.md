@@ -10,7 +10,7 @@ Polymorphism in C++ is a powerful concept that allows objects of different class
 2. **Derived Classes Override Virtual Function:**<br>
    Each derived class that wants to participate in polymorphism overrides the virtual function(s) declared in the base class. This means that the derived class provides its own version of the function with the same signature.
 
-3. **Pointer or Reference to Base Class:**
+3. **Pointer or Reference to Base Class:**<br>
    You can create pointers or references of the base class type that can point to objects of either the base class or its derived classes. This is where the magic of polymorphism happens. When you call a virtual function using such a pointer or reference, the appropriate version of the function is called based on the actual type of the object pointed to.
 
 Here's an example to illustrate how polymorphism works:
@@ -63,7 +63,7 @@ This flexibility and behavior of choosing the correct function to call at runtim
 
 Abstraction in C++ is like using a remote control for a complicated machine. You don't need to know every little detail about how the machine works; you just press buttons on the remote to make it do what you want. In programming, abstraction is a concept that allows you to create a simplified representation of an object by focusing on its essential properties and behaviors, while hiding the unnecessary details. It helps in managing complexity by providing a clear interface for interacting with objects without needing to know the internal implementation details.
 
-An abstract class in C++ is a class that cannot be instantiated directly and is meant to serve as a blueprint for other classes. It often contains pure virtual functions (functions without implementation) that must be overridden by its derived classes. Abstract classes are used to define a common interface and behavior that should be shared among multiple related classes.
+An abstract class in C++ is a class that cannot be instantiated directly and is meant to serve as a blueprint for other classes. It often contains pure virtual functions (functions without implementation) A pure virtual function is declared using the syntax virtual ReturnType functionName() = 0; It must be overridden by its derived classes. Abstract classes are used to define a common interface and behavior that should be shared among multiple related classes.
 
 ### Features of Abstraction
 
@@ -146,4 +146,72 @@ int main() {
 
     return 0;
 }
+```
+
+## Interface
+
+**What is an Interface?**
+
+An interface is a blueprint in C++ that defines a set of methods (functions) that a class must implement. It enforces a contract, ensuring that derived classes provide specific functionality. While C++ doesn't have a dedicated `interface` keyword, you achieve interfaces through abstract classes and pure virtual functions.
+
+**When and Where to Use an Interface:**
+
+Use an interface when you want to:
+- Define a common set of methods that different classes should implement.
+- Ensure that classes adhere to a specific contract without sharing implementation details.
+- Create a consistent way of interacting with objects of various types.
+
+**Key Difference between Interface and Abstract Class:**
+
+1. **Abstract Class**:
+   - Can have both concrete (implemented) methods and pure virtual methods.
+   - Provides the option to share implementation among derived classes.
+   - Can have data members and constructors.
+   - Cannot be instantiated directly.
+   
+2. **Interface**:
+   - Contains only pure virtual methods (no concrete implementations).
+   - Focuses solely on enforcing a contract.
+   - Has no data members or constructors.
+   - Cannot be instantiated directly.
+
+**Example**
+```c++
+#include <iostream>
+
+// Interface
+class Shape {
+public:
+    virtual double area() const = 0; // Pure virtual method
+    virtual double perimeter() const = 0; // Another pure virtual method
+};
+
+// Derived class implementing the interface
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    double area() const override {
+        return 3.14159 * radius * radius;
+    }
+
+    double perimeter() const override {
+        return 2 * 3.14159 * radius;
+    }
+};
+
+int main() {
+    Circle circle(5);
+
+    Shape* shapePtr = &circle;
+
+    std::cout << "Circle Area: " << shapePtr->area() << std::endl;
+    std::cout << "Circle Perimeter: " << shapePtr->perimeter() << std::endl;
+
+    return 0;
+}
+
 ```
