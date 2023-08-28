@@ -4,10 +4,10 @@ Polymorphism in C++ is a powerful concept that allows objects of different class
 
 **How Polymorphism Works:**
 
-1. **Base Class with Virtual Function:** [see more about virtual](03/README.md)
+1. **Base Class with Virtual Function:** [see more about virtual](03/README.md)<br>
    To enable polymorphism, you typically create a base class with one or more virtual functions. A virtual function is a function in the base class that is intended to be overridden by derived classes. This allows each derived class to provide its own implementation of the function.
 
-2. **Derived Classes Override Virtual Function:**
+2. **Derived Classes Override Virtual Function:**<br>
    Each derived class that wants to participate in polymorphism overrides the virtual function(s) declared in the base class. This means that the derived class provides its own version of the function with the same signature.
 
 3. **Pointer or Reference to Base Class:**
