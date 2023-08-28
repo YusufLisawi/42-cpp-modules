@@ -46,3 +46,55 @@ classDiagram
 ```
 
 In summary, abstraction in C++ allows us to create simplified models of real-world concepts, hide complexity, and provide a clear public interface. By using well-defined classes and methods, we can build code that's easier to understand, maintain, and extend. Remember to keep your classes focused, use access modifiers wisely, and document your code for others to use effectively.
+
+Certainly! Here are examples of using abstraction in C++ with code snippets:
+
+### Example: Abstraction with Public Interface
+
+Let's say we want to create an abstract class `Shape` that represents different geometric shapes. We'll define a pure virtual function `area()` in the `Shape` class to represent the area of the shape. Then, we'll create concrete classes `Circle` and `Rectangle` that inherit from `Shape` and provide their implementations of the `area()` function.
+
+```cpp
+#include <iostream>
+
+// Abstract base class
+class Shape {
+public:
+    virtual double area() const = 0; // Pure virtual function
+};
+
+// Derived classes
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    double area() const override {
+        return 3.14159 * radius * radius;
+    }
+};
+
+class Rectangle : public Shape {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+
+    double area() const override {
+        return width * height;
+    }
+};
+
+int main() {
+    Circle circle(5);
+    Rectangle rectangle(4, 6);
+
+    std::cout << "Circle Area: " << circle.area() << std::endl;
+    std::cout << "Rectangle Area: " << rectangle.area() << std::endl;
+
+    return 0;
+}
+```
