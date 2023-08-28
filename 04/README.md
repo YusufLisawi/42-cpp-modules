@@ -1,4 +1,65 @@
-## Abstraction in C++
+## Polymorphism
+
+Polymorphism in C++ is a powerful concept that allows objects of different classes to be treated as objects of a common base class. It enables you to write code that can work with objects in a more general and flexible way, regardless of their specific types. This is achieved through the use of virtual functions and pointers or references to base class objects.
+
+**How Polymorphism Works:**
+
+1. **Base Class with Virtual Function:** [see more about virtual](03/README.md)
+   To enable polymorphism, you typically create a base class with one or more virtual functions. A virtual function is a function in the base class that is intended to be overridden by derived classes. This allows each derived class to provide its own implementation of the function.
+
+2. **Derived Classes Override Virtual Function:**
+   Each derived class that wants to participate in polymorphism overrides the virtual function(s) declared in the base class. This means that the derived class provides its own version of the function with the same signature.
+
+3. **Pointer or Reference to Base Class:**
+   You can create pointers or references of the base class type that can point to objects of either the base class or its derived classes. This is where the magic of polymorphism happens. When you call a virtual function using such a pointer or reference, the appropriate version of the function is called based on the actual type of the object pointed to.
+
+Here's an example to illustrate how polymorphism works:
+
+```cpp
+#include <iostream>
+
+class Animal {
+public:
+    virtual void makeSound() {
+        std::cout << "Animal makes a sound." << std::endl;
+    }
+};
+
+class Cat : public Animal {
+public:
+    void makeSound() override {
+        std::cout << "Cat meows." << std::endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() override {
+        std::cout << "Dog barks." << std::endl;
+    }
+};
+
+int main() {
+    Animal* ptrAnimal;
+    
+    Cat cat;
+    Dog dog;
+
+    ptrAnimal = &cat;
+    ptrAnimal->makeSound(); // Calls Cat's version of makeSound()
+
+    ptrAnimal = &dog;
+    ptrAnimal->makeSound(); // Calls Dog's version of makeSound()
+
+    return 0;
+}
+```
+
+In this example, the base class `Animal` has a virtual function `makeSound()`. The derived classes `Cat` and `Dog` override this function with their own implementations. In the `main()` function, pointers of type `Animal*` are used to point to objects of both `Cat` and `Dog`. When `makeSound()` is called using these pointers, the appropriate version of the function is executed based on the actual type of the object they point to.
+
+This flexibility and behavior of choosing the correct function to call at runtime based on the actual object type is what defines polymorphism in C++. It allows you to write more generic and flexible code, making your programs more extensible and easier to manage.
+
+## Abstraction
 
 Abstraction in C++ is like using a remote control for a complicated machine. You don't need to know every little detail about how the machine works; you just press buttons on the remote to make it do what you want. In programming, abstraction is a concept that allows you to create a simplified representation of an object by focusing on its essential properties and behaviors, while hiding the unnecessary details. It helps in managing complexity by providing a clear interface for interacting with objects without needing to know the internal implementation details.
 
