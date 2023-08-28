@@ -6,6 +6,6 @@ Welcome to the C++ Modules repository! This repository contains modules for lear
 
 | Module | Description |
 | ------ | ----------- |
-| [Module 03](03/README.md) | Explanation of Module 03 (Inheritance, virtual) |
+| [Module 03](03/README.md) | Explanation : (Inheritance, virtual) |
 | [Module 04](04/README.md) | Explanation of Module 04 (Polymorphism, Abstraction, Interfaces)|
 

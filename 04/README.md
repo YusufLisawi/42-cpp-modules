@@ -1,6 +1,6 @@
 ## Abstraction in C++
 
-Abstraction in C++ is like using a remote control for a complicated machine. You don't need to know every little detail about how the machine works; you just press buttons on the remote to make it do what you want. In programming, abstraction lets us hide the complicated parts of a system and focus on what we need.
+Abstraction in C++ is like using a remote control for a complicated machine. You don't need to know every little detail about how the machine works; you just press buttons on the remote to make it do what you want. In programming, abstraction is a concept that allows you to create a simplified representation of an object by focusing on its essential properties and behaviors, while hiding the unnecessary details. It helps in managing complexity by providing a clear interface for interacting with objects without needing to know the internal implementation details.
 
 ### Features of Abstraction
 
