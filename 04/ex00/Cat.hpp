@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 15:16:17 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/29 15:17:37 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/08/29 15:17:00 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/29 15:17:09 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef CAT_HPP
+#define CAT_HPP
 
 #include <iostream>
+#include "Animal.hpp"
 
-class Animal 
+class Cat : public Animal
 {
-    protected:
-        std::string type; 
-    public:
-        Animal();
-        ~Animal();
-        Animal(const Animal& other);
-        Animal& operator=(const Animal& other);
+public:
+    Cat();
+    ~Cat();
+    Cat(const Cat& other);
+    Cat& operator=(const Cat& other);
 };
 
 #endif
