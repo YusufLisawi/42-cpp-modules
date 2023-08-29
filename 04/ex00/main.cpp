@@ -6,13 +6,9 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:30:34 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/29 16:49:58 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:52:48 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "Animal.hpp"
-#include "Cat.hpp"
-#include "Dog.hpp"
 
 #include "Animal.hpp"
 #include "Cat.hpp"
