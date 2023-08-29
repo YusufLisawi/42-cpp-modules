@@ -90,7 +90,59 @@ In summary, the `virtual` keyword in inheritance creates a shared base class ins
 
 ## More about "virtual"
 
-The `virtual` keyword in C++ is used to create a special kind of function or inheritance that brings some really helpful features to our programs. It's like a magic word that helps us build flexible and powerful code. Here's what it does:
+The `virtual` keyword in C++ is used to create a special kind of function or inheritance that brings some really helpful features to our programs. It's like a magic word that helps us build flexible and powerful code. 
+
+PS: [Solving cpp04/ex00](../04/ex00/)<br>
+For example if we have a Base class named **Animal** and subclasses named **Dog** and **Cat** and each class have a method called *makeSound* but the makeSound in the Base Class isn't a virtual function 
+```c++
+void makeSound() const;
+```
+then this is what happens:
+
+```c++
+const Animal* meta = new Animal();
+const Animal* j = new Dog();
+const Animal* i = new Cat();
+i->makeSound(); // Output makeSound of the Animal Class
+j->makeSound(); // Output makeSound of the Animal Class
+meta->makeSound(); // Output makeSound of the Animal Class
+```
+
+and if we added the *makeSound* as virtual 
+```c++
+virtual void makeSound() const;
+```
+
+We get:
+
+```c++
+const Animal* meta = new Animal();
+const Animal* j = new Dog();
+const Animal* i = new Cat();
+i->makeSound(); // Output makeSound of the Cat Class
+j->makeSound(); // Output makeSound of the Dog Class
+meta->makeSound(); // Output makeSound of the Animal Class
+```
+
+---
+
+```c++
+    ...
+    virtual ~Animal()
+    ...
+
+    virtual void makeSound() const;
+    ...
+
+```
+
+We also need to make the destructor method as virtual because if we don't we'll get this Error when we try to delete/free the allocation:
+```
+error: delete called on non-final 'Animal' that has virtual functions but non-virtual destructor [-Werror,-Wdelete-non-abstract-non-virtual-dtor]
+    delete meta;
+```
+
+Here's what it does:
 
 1. **Virtual Functions**:
    When we have a special kind of function called a "virtual function," it means that different objects can have their own versions of that function. It's like having a superpower that lets us change how a function works in different parts of our program. This is really useful when we're dealing with different types of objects that share a common base class but do things differently.

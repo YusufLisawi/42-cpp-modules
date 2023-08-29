@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:17:00 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/29 15:17:09 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:49:41 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ public:
     ~Cat();
     Cat(const Cat& other);
     Cat& operator=(const Cat& other);
+
+    void    makeSound() const;
 };
 
 #endif

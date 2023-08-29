@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:16:08 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/29 15:16:24 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:49:55 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ public:
     ~Dog();
     Dog(const Dog& other);
     Dog& operator=(const Dog& other);
+
+    void    makeSound() const;
 };
 
 #endif
