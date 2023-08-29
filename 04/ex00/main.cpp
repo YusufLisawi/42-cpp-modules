@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:30:34 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/29 15:48:42 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:37:50 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@
 
 int main()
 {
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound(); //will output the cat sound!
-    j->makeSound();
-    meta->makeSound();
-    delete meta;
-    delete j;
-    delete i;
+    const Animal* animal = new Animal();
+    const Animal* cat = new Cat();
+    const Animal* dog = new Dog();
+
+    const Animal* animals[3] = {animal, cat, dog};
+    for (int i = 0; i < 3; i++)
+    {
+        std::cout << animals[i]->getType() << " : ";
+        animals[i]->makeSound();
+    }
+    // Clean up memory
+    delete animal;
+    delete cat;
+    delete dog;
+
     return 0;
 }
