@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:16:17 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/29 15:51:51 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:59:43 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <iostream>
 
+// a virtual function is a member function which is declared within a base class and is re-defined(Overriden) by a derived class.
+// it is a way to give related classes a way to implement the same behaviour in different ways
 class Animal 
 {
     protected:
