@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:40:17 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 13:28:06 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:27:12 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,8 @@ Cure& Cure::operator=(const Cure& other) {
 
 void    Cure::use(ICharacter& target) {
     std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+}
+
+AMateria* Cure::clone() const {
+    return new Cure(*this);
 }

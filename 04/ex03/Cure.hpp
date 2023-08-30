@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:40:35 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 13:27:53 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:27:04 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ public:
     Cure& operator=(const Cure& other);
 
     void    use(ICharacter& target);
+    AMateria* clone() const;
 };
 
 #endif
