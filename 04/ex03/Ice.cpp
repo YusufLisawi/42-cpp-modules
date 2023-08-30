@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:40:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 00:02:47 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:29:06 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,8 @@ Ice& Ice::operator=(const Ice& other) {
         this->type = other.type;
     }
     return *this;
+}
+
+void    Ice::use(ICharacter& target) {
+    std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:24:32 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 00:31:10 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:17:07 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ AMateria::AMateria(const AMateria& other) {
 AMateria& AMateria::operator=(const AMateria& other) {
     std::cout << "Assignment operator called for AMateria" << std::endl;
     if (this != &other) {
-        this->type = other.type;
+        // this->type = other.type;
     }
     return *this;
 }

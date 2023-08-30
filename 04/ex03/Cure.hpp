@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:40:35 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/29 23:41:49 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:27:53 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ public:
     ~Cure();
     Cure(const Cure& other);
     Cure& operator=(const Cure& other);
+
+    void    use(ICharacter& target);
 };
 
 #endif
