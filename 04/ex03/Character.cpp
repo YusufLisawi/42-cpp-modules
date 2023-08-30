@@ -6,14 +6,14 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:31:24 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 15:26:19 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:23:16 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
 Character::Character() : name("Default"), count(0), unequippedCount(0) {
-    std::cout << "Constructor called for Character"<< std::endl;
+    //std::cout << "Constructor called for Character"<< std::endl;
     this->inventory = new AMateria*[4];
     this->unequippedMaterias = new AMateria*[4];
     for (int i = 0; i < 4; i++) {
@@ -23,7 +23,7 @@ Character::Character() : name("Default"), count(0), unequippedCount(0) {
 }
 
 Character::Character(std::string const &name) : name(name), count(0), unequippedCount(0) {
-    std::cout << "Constructor called for Character"<< std::endl;
+    //std::cout << "Constructor called for Character"<< std::endl;
     this->inventory = new AMateria*[4];
     this->unequippedMaterias = new AMateria*[4];
     for (int i = 0; i < 4; i++) {
@@ -33,7 +33,7 @@ Character::Character(std::string const &name) : name(name), count(0), unequipped
 }
 
 Character::~Character() {
-    std::cout << "Destructor called for Character"<< std::endl;
+    //std::cout << "Destructor called for Character"<< std::endl;
     for (int i = 0; i < 4; i++) {
         delete this->inventory[i];
         delete this->unequippedMaterias[i];
@@ -43,14 +43,14 @@ Character::~Character() {
 }
 
 Character::Character(const Character& other) {
-    std::cout << "Copy constructor called for Character"<< std::endl;
+    //std::cout << "Copy constructor called for Character"<< std::endl;
     *this = other;
 }
 
 Character& Character::operator=(const Character& other) {
-    std::cout << "Assignment operator called for Character" << std::endl;
+    //std::cout << "Assignment operator called for Character" << std::endl;
     if (this != &other) {
-         // Delete the current Materias
+        // Delete the current Materias
         for (int i = 0; i < 4; i++) {
             delete this->inventory[i];
             delete this->unequippedMaterias[i];
@@ -86,14 +86,14 @@ void    Character::equip(AMateria* m) {
     }
 }
 void Character::unequip(int idx) {
-    if (unequippedCount > 3) {
-       for (int i = 0; i < 4; i++) {
-            delete this->unequippedMaterias[i];
-            this->unequippedMaterias[i] = NULL;
-        }
-        this->unequippedCount = 0;
-    }
     if (idx >= 0 && idx < 4) {
+        if (unequippedCount > 3) {
+        for (int i = 0; i < 4; i++) {
+                delete this->unequippedMaterias[i];
+                this->unequippedMaterias[i] = NULL;
+            }
+            this->unequippedCount = 0;
+        }
         this->unequippedMaterias[this->unequippedCount] = this->inventory[idx];
         this->inventory[idx] = NULL;
         this->unequippedCount++;
