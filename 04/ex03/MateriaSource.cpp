@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:20:55 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 18:23:16 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:30:46 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,17 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
     //std::cout << "Assignment operator called for MateriaSource" << std::endl;
     if (this != &other) {
         this->nbMateria = other.nbMateria;
+        // Delete the current Materias
         for (int i = 0; i < 4; i++) {
-            this->materias[i] = other.materias[i];
+            if (this->materias[i] != NULL)
+                delete this->materias[i];
+        }
+        // Copy the new Materias
+        for (int i = 0; i < 4; i++) {
+            if (other.materias[i] != NULL)
+                this->materias[i] = other.materias[i]->clone();
+            else
+                this->materias[i] = NULL;
         }
     }
     return *this;
@@ -48,6 +57,8 @@ void        MateriaSource::learnMateria(AMateria* materia) {
         this->materias[this->nbMateria] = materia;
         this->nbMateria++;
     }
+    else
+        std::cout << "MateriaSource is full" << std::endl;
 }
 
 AMateria*   MateriaSource::createMateria(std::string const & type) {

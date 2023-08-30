@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:31:24 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 18:23:16 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:30:29 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,29 @@ Character::Character(const Character& other) {
 Character& Character::operator=(const Character& other) {
     //std::cout << "Assignment operator called for Character" << std::endl;
     if (this != &other) {
-        // Delete the current Materias
+        // Delete the current data
         for (int i = 0; i < 4; i++) {
-            delete this->inventory[i];
-            delete this->unequippedMaterias[i];
+            if (this->inventory[i] != NULL) {
+                delete this->inventory[i];
+            }
+            if (this->unequippedMaterias[i] != NULL) {
+                delete this->unequippedMaterias[i];
+            }
         }
-        // Copy the new Materias
+        // Copy the new data
         this->name = other.name;
         this->count = other.count;
         this->unequippedCount = other.unequippedCount;
         for (int i = 0; i < 4; i++) {
-            if (other.inventory[i] != NULL) {
+            if (other.inventory[i] != NULL)
                 this->inventory[i] = other.inventory[i]->clone();
-            } else {
+            else
                 this->inventory[i] = NULL;
-            }
-            if (other.unequippedMaterias[i] != NULL) {
+            
+            if (other.unequippedMaterias[i] != NULL)
                 this->unequippedMaterias[i] = other.unequippedMaterias[i]->clone();
-            } else {
+            else
                 this->unequippedMaterias[i] = NULL;
-            }
         }
     }
     return *this;
@@ -84,14 +87,19 @@ void    Character::equip(AMateria* m) {
         this->inventory[this->count] = m;
         this->count++;
     }
+    else {
+        std::cout << "Inventory is full" << std::endl;
+    }
 }
 void Character::unequip(int idx) {
     if (idx >= 0 && idx < 4) {
         if (unequippedCount > 3) {
-        for (int i = 0; i < 4; i++) {
-                delete this->unequippedMaterias[i];
-                this->unequippedMaterias[i] = NULL;
-            }
+            for (int i = 0; i < 4; i++) {
+                    if (this->unequippedMaterias[i] != NULL) {
+                        delete this->unequippedMaterias[i];
+                        this->unequippedMaterias[i] = NULL;   
+                    }
+                }
             this->unequippedCount = 0;
         }
         this->unequippedMaterias[this->unequippedCount] = this->inventory[idx];
@@ -99,9 +107,14 @@ void Character::unequip(int idx) {
         this->unequippedCount++;
         this->count--;
     }
+    else {
+        std::cout << "Index out of range" << std::endl;
+    }
 }
 
 void Character::use(int idx, ICharacter& target) {
     if (idx >= 0 && idx < 4 && this->inventory[idx] != NULL)
         this->inventory[idx]->use(target);
+    else
+        std::cout << "Index out of range" << std::endl;
 }
