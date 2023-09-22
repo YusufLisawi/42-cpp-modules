@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:31:40 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 12:37:34 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:28:21 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ private:
     bool                isSigned;
 public:
     AForm();
-    ~AForm();
+    virtual ~AForm();
     AForm(std::string const name, int const gradeToSign, int const gradeToExecute);
     AForm(const AForm& other);
     AForm& operator=(const AForm& other);

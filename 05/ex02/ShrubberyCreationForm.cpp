@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:31:51 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 13:11:35 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:32:15 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
     // std::cout << "Destructor called for ShrubberyCreationForm"<< std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute())
 {
     // std::cout << "Copy constructor called for ShrubberyCreationForm"<< std::endl;
     *this = other;
@@ -52,8 +52,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
         else
         {
             std::ofstream file;
-            file.open(this->target + "_shrubbery", std::ios::out | std::ios::trunc);
-            std::string asciiArt = 
+            file.open(this->target + "_shrubbery");
+            std::string treeAscii = 
         "       _-_\n"
         "    /~~   ~~\\\n"
         " /~~         ~~\\\n"
@@ -65,7 +65,10 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
         "      // \\\\";
     
             if (file.is_open())
-                file << asciiArt << std::endl;
+            {
+                file << treeAscii << std::endl;
+                file.close();
+            }
         }
     }
     else
