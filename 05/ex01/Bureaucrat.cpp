@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 12:31:09 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 12:31:10 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/09/22 12:31:05 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/09/22 12:31:06 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,16 @@ void Bureaucrat::decrement() {
         throw Bureaucrat::GradeTooLowException();
     }
     this->grade++;
+}
+
+void Bureaucrat::signForm(AForm &form) {
+    try {
+        form.beSigned(*this);
+        std::cout << this->name << " signed " << form.getName() << std::endl;
+    }
+    catch (std::exception& e) {
+        std::cout << this->name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+    }
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
