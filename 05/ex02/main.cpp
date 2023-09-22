@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:31:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 20:34:26 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:49:19 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 int main()
 {
-    Bureaucrat *bureaucrat = new Bureaucrat("Bureaucrat", 5);
-    ShrubberyCreationForm *shrubberyForm = new ShrubberyCreationForm("Home");
-    RobotomyRequestForm *robotomyForm = new RobotomyRequestForm("Elon Musk");
-    PresidentialPardonForm *presidentialForm = new PresidentialPardonForm("Joe biden");
+    Bureaucrat *bureaucrat = new Bureaucrat("Bureaucrat", 6);
+    AForm *shrubberyForm = new ShrubberyCreationForm("Home");
+    AForm *robotomyForm = new RobotomyRequestForm("Elon Musk");
+    AForm *presidentialForm = new PresidentialPardonForm("Joe biden");
 
     try
     {
