@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:00:15 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 13:04:13 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:46:34 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ public:
     void        decrement();
     void        signForm(AForm& form);
     void        executeForm(AForm const & form);
+
     class GradeTooHighException : public std::exception
     {
         public:

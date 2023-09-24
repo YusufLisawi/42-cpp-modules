@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:31:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 20:49:19 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:23:33 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,23 @@ int main()
     AForm *robotomyForm = new RobotomyRequestForm("Elon Musk");
     AForm *presidentialForm = new PresidentialPardonForm("Joe biden");
 
-    try
-    {
-        bureaucrat->signForm(*shrubberyForm);
-        bureaucrat->executeForm(*shrubberyForm);
+    std::cout << *bureaucrat;
+    std::cout << *shrubberyForm;
+    std::cout << *robotomyForm;
+    std::cout << *presidentialForm;
 
-        bureaucrat->signForm(*robotomyForm);
-        bureaucrat->executeForm(*robotomyForm);
+    bureaucrat->signForm(*shrubberyForm);
+    bureaucrat->executeForm(*shrubberyForm);
 
-        bureaucrat->signForm(*presidentialForm);
-        bureaucrat->executeForm(*presidentialForm);
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+    bureaucrat->signForm(*robotomyForm);
+    bureaucrat->executeForm(*robotomyForm);
+
+    bureaucrat->signForm(*presidentialForm);
+    bureaucrat->executeForm(*presidentialForm);
+
+    std::cout << *shrubberyForm;
+    std::cout << *robotomyForm;
+    std::cout << *presidentialForm; 
 
     delete bureaucrat;
     delete shrubberyForm;

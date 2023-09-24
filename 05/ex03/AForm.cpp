@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:31:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 12:31:39 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:24:34 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void AForm::beSigned(Bureaucrat& bureaucrat) {
 }
 
 std::ostream& operator<<(std::ostream& out, AForm& AForm) {
-    out << AForm.getName() << ", AForm grade to sign " << AForm.getGradeToSign() << ", AForm grade to execute " << AForm.getGradeToExecute() << ", AForm is signed " << AForm.getIsSigned() << std::endl;
+    out << AForm.getName() << ", grade to sign " << AForm.getGradeToSign() << ", grade to execute " << AForm.getGradeToExecute() << ", is signed : " << AForm.getIsSigned() << std::endl;
     return out;
 }
 

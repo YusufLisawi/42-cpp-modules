@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:31:28 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/22 12:31:29 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:46:26 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ int main()
     Bureaucrat bureaucrat("John", 1);
 
     // Test getName and getGrade methods
-    std::cout << "Bureaucrat name: " << bureaucrat.getName() << std::endl;
-    std::cout << "Bureaucrat grade: " << bureaucrat.getGrade() << std::endl;
+    std::cout << bureaucrat << std::endl;
 
     // Test increment method
     try
     {
         bureaucrat.increment();
-        std::cout << "Bureaucrat grade after increment: " << bureaucrat.getGrade() << std::endl;
+        std::cout << bureaucrat << std::endl;
     }
     catch (std::exception& e)
     {
@@ -36,7 +35,7 @@ int main()
     try
     {
         bureaucrat.decrement();
-        std::cout << "Bureaucrat grade after decrement: " << bureaucrat.getGrade() << std::endl;
+        std::cout << bureaucrat << std::endl;
     }
     catch (std::exception& e)
     {
@@ -47,7 +46,7 @@ int main()
     try
     {
         Bureaucrat bureaucrat2("Jane", 0);
-        std::cout << "Bureaucrat2 grade: " << bureaucrat2.getGrade() << std::endl;
+        std::cout << bureaucrat2 << std::endl;
     }
     catch (std::exception& e)
     {
@@ -58,7 +57,7 @@ int main()
     try
     {
         Bureaucrat bureaucrat3("Bob", 151);
-        std::cout << "Bureaucrat3 grade: " << bureaucrat3.getGrade() << std::endl;
+        std::cout << bureaucrat3 << std::endl;
     }
     catch (std::exception& e)
     {
