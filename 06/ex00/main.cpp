@@ -6,10 +6,9 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 20:52:50 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/26 22:24:43 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:24:55 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ScalarConverter.hpp"
 
