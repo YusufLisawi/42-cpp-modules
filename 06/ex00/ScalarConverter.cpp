@@ -6,11 +6,13 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:32:51 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/26 21:34:42 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:09:00 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+
+char ScalarConverter::type = '\0';
 
 ScalarConverter::ScalarConverter() {
     // std::cout << "Constructor called for ScalarConverter"<< std::endl;
@@ -35,51 +37,20 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) {
 
 void    ScalarConverter::convert(std::string str)
 {
-    std::cout << "char: ";
-    try
-    {
-        char c = static_cast<char>(std::stoi(str));
-        if (c < 32 || c > 126)
-            std::cout << "Non displayable" << std::endl;
-        else
-            std::cout << "'" << c << "'" << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "impossible" << std::endl;
-    }
+    char    *endPtr;
+    
+    strtod(str.c_str(), &endPtr);
+    // if (*endPtr != '\0' && str.length() == 1)
+    // {
+    //     str = static_cast<int>(str[0]);
+    //     std::cout << "char: '" << str << "'" << std::endl;  
+    // }
+    if (*endPtr != '\0' && str[str.length() - 1] == 'f')
+        str.erase(str.length() - 1);
 
-    std::cout << "int: ";
-    try
-    {
-        int i = static_cast<int>(std::stoi(str));
-        std::cout << i << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "impossible" << std::endl;
-    }
-
-    std::cout << "float: ";
-    try
-    {
-        float f = static_cast<float>(std::stof(str));
-        std::cout << f << "f" << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "impossible" << std::endl;
-    }
-
-    std::cout << "double: ";
-    try
-    {
-        double d = static_cast<double>(std::stod(str));
-        std::cout << d << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "impossible" << std::endl;
-    }
-
+    std::cout << std::fixed << std::setprecision((str.find('.') != std::string::npos) ? str.length() - str.find('.') - 1 : 1);
+    printChar(str);
+    printInt(str);
+    printFloat(str);
+    // printDouble(str);
 }

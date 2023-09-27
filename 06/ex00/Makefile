@@ -1,4 +1,4 @@
-NAME = ScalarConverter
+NAME = convert
 
 SRCS = main.cpp ScalarConverter.cpp
 
@@ -6,7 +6,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 CXX = c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 
 all: $(NAME)
 
