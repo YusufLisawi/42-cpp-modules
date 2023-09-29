@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:32:51 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/28 22:17:59 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:50:48 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) {
     return *this;
 }
 
+const char *ScalarConverter::ImpossibleException::what() const throw()
+{
+    return "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible";
+}
 
 void    ScalarConverter::convert(std::string str)
 {
@@ -49,10 +53,10 @@ void    ScalarConverter::convert(std::string str)
 		return ;
 	}
     
-    if (*endPtr != '\0' && str[str.length() - 1] == 'f')
-        str.erase(str.length() - 1);
     if (*endPtr != '\0' && str.length() == 1)
         d = static_cast<double>(str[0]);
+    else if (*endPtr != '\0' && str[str.length() - 1] == 'f')
+        str.erase(str.length() - 1);
 
     if ((*endPtr != '\0' && str.length() == 1) \
         || (*endPtr != '\0' && str[str.length() - 1] == 'f') \
@@ -66,22 +70,31 @@ void    ScalarConverter::convert(std::string str)
         printDouble(d);
     }
     else
+        throw ScalarConverter::ImpossibleException();
+}
+
+void ScalarConverter::printChar(double d)
+{
+    std::cout << "char: ";
+    if (d >= 0 && d <= 127)
     {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: impossible" << std::endl;
-        std::cout << "double: impossible" << std::endl;
+        if (std::isprint(d))
+            std::cout << "'" << static_cast<char>(d) << "'" << std::endl;
+        else
+            std::cout << "Non displayable" << std::endl;
     }
+    else
+        std::cout << "impossible" << std::endl;
 }
 
-void    ScalarConverter::printChar(double d)
+void ScalarConverter::printInt(double d)
 {
-    std::cout << "char: " << ((d >= 0 && d <= 127) ? (std::isprint(d) ? std::string("'") + static_cast<char>(d) + "'" : "Non displayable") : "impossible") << std::endl;
-}
-
-void    ScalarConverter::printInt(double d)
-{
-    std::cout << "int: " << ((d > INT_MAX || d < INT_MIN) ? "impossible" : std::to_string(static_cast<int>(d))) << std::endl;
+    std::cout << "int: ";
+    if (d > INT_MAX || d < INT_MIN)
+        std::cout << "impossible";
+    else
+        std::cout << std::to_string(static_cast<int>(d));
+    std::cout << std::endl;
 }
 
 void    ScalarConverter::printFloat(double d)
