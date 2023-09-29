@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 23:08:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/29 23:41:25 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/30 00:04:16 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int main()
 
     std::cout << "Deserialized value: " << deserialized->s1 << deserialized->s2 << std::endl;
 
+    delete data;
     return 0;
 }
