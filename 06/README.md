@@ -107,3 +107,5 @@ C++ provides various casting operators to facilitate type conversions between di
 - `static_cast` performs compile-time type checking, catching type-related errors early.
 
 In summary, choosing the appropriate casting operator depends on the specific requirements and safety considerations of your code. Use `dynamic_cast` for safe downcasting and runtime type checking, `reinterpret_cast` for low-level bit manipulation, and `static_cast` for standard and user-defined type conversions. Always exercise caution when using `reinterpret_cast`, as it can lead to undefined behavior if misused.
+
+<img src="https://www.vishalchovatiya.com/wp-content/uploads/C-type-casting-with-example-for-C-developers.png" />
