@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:32:51 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/30 16:07:02 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:09:35 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void    ScalarConverter::convert(std::string str)
     
     if (*endPtr != '\0' && str.length() == 1)
         d = static_cast<double>(str[0]);
-    else if (*endPtr != '\0' && str[str.length() - 1] == 'f')
+    else if (*endPtr != '\0' && *endPtr == 'f' && *(endPtr + 1) == '\0')
         str.erase(str.length() - 1);
 
     if ((*endPtr != '\0' && str.length() == 1) \
-        || (*endPtr != '\0' && str[str.length() - 1] == 'f') \
+        || (*endPtr != '\0' && *endPtr == 'f' && *(endPtr + 1) == '\0') \
         || (*endPtr == '\0' && str.find('.') != std::string::npos) \
         || (*endPtr == '\0'))
     {
