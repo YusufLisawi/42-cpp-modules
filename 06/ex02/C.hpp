@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/29 23:52:28 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/30 10:33:51 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/09/30 10:40:19 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/09/30 10:40:55 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.hpp"
+#ifndef C_HPP
+# define C_HPP
 
-int main() {
-    Base* base = generate();
-    identify(base);
-    identify(*base);
-    return 0;
-}
+#include "Base.hpp"
+
+class C : public Base {};
+
+#endif
