@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:32:51 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/29 12:50:48 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:07:02 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void ScalarConverter::printInt(double d)
     if (d > INT_MAX || d < INT_MIN)
         std::cout << "impossible";
     else
-        std::cout << std::to_string(static_cast<int>(d));
+        std::cout << static_cast<int>(d);
     std::cout << std::endl;
 }
 
