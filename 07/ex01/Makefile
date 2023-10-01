@@ -1,4 +1,4 @@
-NAME = whatever
+NAME = Iter
 
 SRCS = main.cpp
 
