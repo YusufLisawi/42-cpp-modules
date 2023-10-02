@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:32:55 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/29 12:37:22 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:40:32 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
-#include <string>
 #include <iomanip>
 #include <cfloat>
+#include <cstdlib>
+#include <climits>
 
 class ScalarConverter 
 {
