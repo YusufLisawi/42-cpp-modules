@@ -9,4 +9,5 @@ Welcome to the C++ Modules repository! This repository contains modules for lear
 | [Module 03](03/README.md) | Inheritance, virtual |
 | [Module 04](04/README.md) | Polymorphism, Abstraction, Interfaces |
 | [Module 05](05/README.md) | Exceptions |
+| [Module 06](06/README.md) | Casting |
 
