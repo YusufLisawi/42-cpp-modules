@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 15:11:56 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/04 15:18:12 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/10/01 19:57:18 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/10/04 15:24:18 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "Array.hpp"
 
-# include <iostream>
-
-template <typename T>
-class Array
+int main()
 {
-    private:
-        T *array;
-        unsigned int size; 
-    public:
-        Array(void);
-        Array(unsigned int n);
-        Array(Array  const &other);
-        ~Array();
-        Array &operator=(Array const &other);
-        T &operator[](unsigned int i);
+    Array<int> intArray(5);
 
-        unsigned int getSize(void) const;
-};
-
-# include "Array.tpp"
+    for (unsigned int i = 0; i < intArray.getSize(); i++)
+        intArray[i] = i;
+    for (unsigned int i = 0; i < intArray.getSize(); i++)
+        std::cout << intArray[i] << std::endl;
+    try {
+        std::cout << intArray[5] << std::endl;
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+}
