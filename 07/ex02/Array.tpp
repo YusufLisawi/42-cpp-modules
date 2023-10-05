@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 15:21:18 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/04 16:27:24 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/05 08:50:44 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,29 @@ Array<T>::Array()
 template <typename T>
 Array<T>::Array(unsigned int n)
 {
-    this->array = new T[n];
-    this->length = n;
+    try
+    {
+        this->array = new T[n];
+        this->length = n;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 template <typename T>
 Array<T>::Array(Array const &other)
 {
-    this->array = new T[other.length]; 
+    this->array = NULL; 
     *this = other;
 }
 
 template <typename T>
 Array<T>::~Array()
 {
-    delete [] this->array;
+    if (this->array)
+        delete [] this->array;
 }
 
 template <typename T>
