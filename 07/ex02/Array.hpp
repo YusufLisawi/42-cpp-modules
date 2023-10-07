@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 15:11:56 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/04 16:23:26 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/07 09:42:33 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # include <iostream>
 
-template <typename T>
+template <class T>
 class Array
 {
     private:
