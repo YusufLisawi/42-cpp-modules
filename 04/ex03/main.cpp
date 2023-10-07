@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:01:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/30 20:56:21 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:08:22 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "MateriaSource.hpp"
 #include "Character.hpp"
 
-int main()
+void goddamn()
 {
     ICharacter *me = new Character("me");
     ICharacter *bob = new Character("bob");
@@ -103,6 +103,10 @@ int main()
     delete bob;
     delete me;
     delete src;
+}
+int main()
+{
+    goddamn();
     system("leaks materia -q");
     return 0;
 }
