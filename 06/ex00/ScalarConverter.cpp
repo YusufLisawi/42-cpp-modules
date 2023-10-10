@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:32:51 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/09/30 16:09:35 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:31:18 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,3 @@ void    ScalarConverter::printDouble(double d)
 {
     std::cout << "double: " << d << std::endl;
 }
-
