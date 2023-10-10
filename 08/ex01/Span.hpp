@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:29:02 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/10 17:10:14 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:16:32 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ public:
     void    addNumber(unsigned int n);
     int     shortestSpan();
     int     longestSpan();
+
+    void addRange(std::vector<int>::iterator first, std::vector<int>::iterator last);
 
     class ReachedMaxException : public std::exception {
         public:

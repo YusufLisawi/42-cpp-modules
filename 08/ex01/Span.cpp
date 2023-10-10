@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:29:05 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/10 18:00:18 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:16:23 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,14 @@ int Span::longestSpan()
     int max = *std::max_element(this->container.begin(), this->container.end());
     int min = *std::min_element(this->container.begin(), this->container.end());
     return (max - min);
+}
+
+void Span::addRange(std::vector<int>::iterator first, std::vector<int>::iterator last)
+{
+    if (std::distance(first, last) > static_cast<long>(N - container.size())) {
+        throw std::out_of_range("Span container is full");
+    }
+    container.insert(container.end(), first, last);
 }
 
 const char *Span::ReachedMaxException::what() const throw()

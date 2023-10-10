@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:56:21 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/10 17:53:45 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:10:04 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,44 @@
 
 int main()
 {
-    // Test constructor
-    Span span(5);
+    Span spn = Span(10000);
 
-    // Test addNumber
-    span.addNumber(1);
-    span.addNumber(499);
-    span.addNumber(500);
-
-    // Test shortestSpan
-    std::cout << "Shortest span: " << span.shortestSpan() << std::endl;
-
-    // Test longestSpan
-    std::cout << "Longest span: " << span.longestSpan() << std::endl;
-
-    // Test exception handling
-    try {
-        span.addNumber(6);
-    } catch (const Span::ReachedMaxException& e) {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
+    std::srand(std::time(nullptr));
+    for (int i = 0; i < 10000; i++)
+    {
+        spn.addNumber(std::rand());
     }
 
-    try {
-        Span emptySpan;
-        emptySpan.shortestSpan();
-    } catch (const Span::NoSpanFoundException& e) {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
+    std::cout << "Shortest span: " << spn.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << spn.longestSpan() << std::endl;
+
+    try
+    {
+        spn.addNumber(1);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
     }
 
+    try
+    {
+        Span empty = Span(0);
+        std::cout << empty.shortestSpan() << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    
+    Span sp = Span(5);
+    sp.addNumber(6);
+    sp.addNumber(3);
+    sp.addNumber(17);
+    sp.addNumber(9);
+    sp.addNumber(11);
+    std::cout << sp.shortestSpan() << std::endl;
+    std::cout << sp.longestSpan() << std::endl;
     return 0;
 }
