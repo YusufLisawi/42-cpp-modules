@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:16:55 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/10 16:20:31 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:30:21 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int main()
     }
 
     try {
-        std::cout << easyfind(vec, 3) << std::endl;
-        std::cout << easyfind(lst, 40) << std::endl;
-        std::cout << easyfind(st, 500) << std::endl;
-        std::cout << easyfind(dq, 6000) << std::endl;
-        std::cout << easyfind(vec, 600) << std::endl;
+        std::cout << *easyfind(vec, 3) << std::endl;
+        std::cout << *easyfind(lst, 40) << std::endl;
+        std::cout << *easyfind(st, 500) << std::endl;
+        std::cout << *easyfind(dq, 6000) << std::endl;
+        std::cout << *easyfind(vec, 600) << std::endl;
     } catch (std::exception &e) {
         std::cout << "Element not found in container" << std::endl;
     }

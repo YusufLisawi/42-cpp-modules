@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:56:21 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/10 18:10:04 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:05:46 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int main()
 {
+    
     Span spn = Span(10000);
 
-    std::srand(std::time(nullptr));
+    std::srand(std::time(0));
     for (int i = 0; i < 10000; i++)
     {
         spn.addNumber(std::rand());
@@ -43,6 +44,16 @@ int main()
     {
         std::cout << e.what() << std::endl;
     }
+
+    Span s(5);
+    std::vector<int> v;
+    v.push_back(5);
+    v.push_back(54);
+    v.push_back(34);
+    v.push_back(2);
+    s.addRange(v.begin(), v.end());
+    std::cout << "Shortest span: " << s.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << s.longestSpan() << std::endl;
 
     
     Span sp = Span(5);
