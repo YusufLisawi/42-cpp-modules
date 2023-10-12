@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 08:49:23 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/12 15:07:57 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:45:09 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,21 @@
 class BitcoinExchange 
 {
 private:
-    std::ifstream fileData;
     std::map<std::string, double> data;
-    std::map<std::string, double> input;
 public:
     BitcoinExchange();
-    BitcoinExchange(std::string datafile, std::string inputfile);
+    BitcoinExchange(std::string datafile);
     ~BitcoinExchange();
     BitcoinExchange(const BitcoinExchange& other);
     BitcoinExchange& operator=(const BitcoinExchange& other);
 
-    void readData();
+    void exchange(std::string inputfile);
+    void handleExchange(std::string date, std::string value);
+
+    void readData(std::ifstream &fileData);
 
     bool checkDateValidity(std::string date);
-    void checkDatePattern(std::string date);
-    void checkMonthLimit(std::string year, std::string month, std::string day);
+    bool checkDatePattern(std::string date);
+    bool checkMonthLimit(std::string year, std::string month, std::string day);
 };
 

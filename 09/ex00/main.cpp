@@ -6,17 +6,22 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 09:32:45 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/12 15:09:43 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:37:25 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-int main()
+int main(int ac, char **av)
 {
-    try {
-        BitcoinExchange btc = BitcoinExchange("data.csv", "input.txt");
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;   
+    BitcoinExchange btc = BitcoinExchange("data.csv");
+
+    if (ac == 2)
+    {
+        btc.exchange(av[1]);
+    }
+    else
+    {
+        std::cout << "Usage: ./bitcoin [inputfile]" << std::endl;
     }
 }
