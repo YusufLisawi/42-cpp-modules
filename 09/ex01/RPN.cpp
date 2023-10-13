@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:55:08 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/13 14:55:09 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:44:52 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 RPN::RPN() {
     // std::cout << "Constructor called for RPN"<< std::endl;
+    str = "";
+}
+
+RPN::RPN(std::string str) {
+    // std::cout << "Constructor called for RPN"<< std::endl;
+    this->str = str;
 }
 
 RPN::~RPN() {
@@ -28,7 +34,62 @@ RPN::RPN(const RPN& other) {
 RPN& RPN::operator=(const RPN& other) {
     // std::cout << "Assignment operator called for RPN" << std::endl;
     if (this != &other) {
-        // Copy data here
+        this->stack = other.stack;
+        this->str = other.str;
     }
     return *this;
+}
+
+double RPN::calculate()
+{
+    std::string::iterator it = str.begin();
+
+    for (; it != str.end(); it++)
+    {
+        if (*it == ' ')
+            continue;
+        if (*it >= '0' && *it <= '9')
+        {
+            std::string num_str = "";
+            while (*it >= '0' && *it <= '9')
+            {
+                num_str += *it;
+                it++;
+            }
+            it--;
+            stack.push(std::strtod(num_str.c_str(), NULL));
+        }
+        else if (*it == '+' || *it == '-' || *it == '*' || *it == '/' || *it == '%')
+        {
+            if (stack.size() < 2)
+                throw std::invalid_argument("Error");
+            double a = stack.top();
+            stack.pop();
+            double b = stack.top();
+            stack.pop();
+            if (*it == '+')
+                stack.push(a + b);
+            else if (*it == '-')
+                stack.push(b - a);
+            else if (*it == '*')
+                stack.push(a * b);
+            else if (*it == '/')
+            {
+                if (a == 0)
+                    throw std::invalid_argument("Error");
+                stack.push(b / a);
+            }
+            else if (*it == '%')
+            {
+                if (a == 0)
+                    throw std::invalid_argument("Error");
+                stack.push(static_cast<int>(b) % static_cast<int>(a));
+            }
+        }
+        else
+            throw std::invalid_argument("Error");
+    }
+    if (stack.size() != 1)
+        throw std::invalid_argument("Error");
+    return stack.top();
 }

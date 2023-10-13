@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 08:49:23 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/13 10:07:11 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:52:59 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,5 @@ public:
     bool checkDateValidity(std::string date);
     bool checkDatePattern(std::string date);
     bool checkMonthLimit(std::string year, std::string month, std::string day);
-
-    int ftos(double f);
 };
 

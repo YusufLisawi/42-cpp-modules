@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 08:49:32 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/13 10:58:57 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:52:48 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,11 @@ void BitcoinExchange::handleExchange(std::string date, std::string value)
     if (d < 0)
         throw std::invalid_argument("Error: not a positive number.");
 
-    if (d > INT_MAX)
+    if (d > INT_MAX || d > 1000)
         throw std::invalid_argument("Error: too large a number.");
 
-    // if (!checkDateValidity(itData->first))
-    //     throw std::invalid_argument("Error: bad input => " + itData->first);
-
     double res = d * itData->second;
-    std::cout << itData->first << " => " << d << " = " << std::fixed << std::setprecision(ftos(res)) << res << std::endl;
+    std::cout << itData->first << " => " << d << " = " << res << std::endl;
 }
 
 
@@ -201,27 +198,4 @@ bool BitcoinExchange::checkMonthLimit(std::string year, std::string month, std::
     else if ((month == "04" || month == "06" || month == "09" || month == "11") && day > "30")
         return false;
     return true;
-}
-
-int BitcoinExchange::ftos(double f)
-{
-    std::ostringstream buffer;
-    buffer << std::fixed << std::setprecision(5) << f;
-    std::string str = buffer.str();
-
-    // Count the number of non-zero digits after the decimal point
-    int nonZeroCount = 0;
-    bool decimalPointFound = false;
-
-    for (size_t i = 0; i < str.length(); ++i) {
-        if (str[i] == '.') {
-            decimalPointFound = true;
-        } else if (decimalPointFound) {
-            if (str[i] != '0') {
-                nonZeroCount++;
-            }
-        }
-    }
-
-    return nonZeroCount;
 }
