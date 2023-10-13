@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:58:23 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/11 19:37:56 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:32:07 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include <stack>
 #include <deque>
 
-template <class T, class Container = std::deque<T> >
+template <class T>
 class MutantStack : public std::stack<T>
 {
 public:
-    MutantStack() : std::stack<T>() {};
+    MutantStack() : std::stack<T>()
     ~MutantStack() {};
     MutantStack(const MutantStack& other) : std::stack<T>() { 
         *this = other;
@@ -29,7 +29,7 @@ public:
         (void)other;
         return *this;
     };
-    typedef typename Container::iterator iterator;
+    typedef typename std::stack<T>::container_type::iterator iterator;
     iterator begin() { 
         return std::stack<T>::c.begin();
     };
