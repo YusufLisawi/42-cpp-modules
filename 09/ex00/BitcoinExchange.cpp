@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 08:49:32 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/12 17:46:53 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:58:57 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,12 @@ void BitcoinExchange::handleExchange(std::string date, std::string value)
     if (date.empty() || value.empty())
         throw std::invalid_argument("Error: Invalid input file");
     
-    if (data.find(date) == data.end())
+    std::map<std::string, double>::iterator itData = data.lower_bound(date);
+    if (itData == data.end() || itData->first != date)
     {
-        std::string closestDate = "";
-        for (std::map<std::string, double>::iterator it = data.begin(); it != data.end(); it++)
-        {
-            if (it->first < date)
-                closestDate = it->first;
-        }
-        if (closestDate.empty())
+        if (itData == data.begin())
             throw std::invalid_argument("Error: bad input => " + date);
-        date = closestDate; 
+        itData--;
     }
     
     char *end;
@@ -121,11 +116,13 @@ void BitcoinExchange::handleExchange(std::string date, std::string value)
     if (d > INT_MAX)
         throw std::invalid_argument("Error: too large a number.");
 
-    if (!checkDateValidity(date))
-        throw std::invalid_argument("Error: bad input => " + date);
+    // if (!checkDateValidity(itData->first))
+    //     throw std::invalid_argument("Error: bad input => " + itData->first);
 
-    std::cout << date << " => " << d << " = " << std::fixed << std::setprecision(3) << d * data[date] << std::endl;
+    double res = d * itData->second;
+    std::cout << itData->first << " => " << d << " = " << std::fixed << std::setprecision(ftos(res)) << res << std::endl;
 }
+
 
 void BitcoinExchange::readData(std::ifstream &fileData)
 {
@@ -204,4 +201,27 @@ bool BitcoinExchange::checkMonthLimit(std::string year, std::string month, std::
     else if ((month == "04" || month == "06" || month == "09" || month == "11") && day > "30")
         return false;
     return true;
+}
+
+int BitcoinExchange::ftos(double f)
+{
+    std::ostringstream buffer;
+    buffer << std::fixed << std::setprecision(5) << f;
+    std::string str = buffer.str();
+
+    // Count the number of non-zero digits after the decimal point
+    int nonZeroCount = 0;
+    bool decimalPointFound = false;
+
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (str[i] == '.') {
+            decimalPointFound = true;
+        } else if (decimalPointFound) {
+            if (str[i] != '0') {
+                nonZeroCount++;
+            }
+        }
+    }
+
+    return nonZeroCount;
 }

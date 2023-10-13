@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 09:32:45 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/12 16:37:25 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:46:08 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ int main(int ac, char **av)
 
     if (ac == 2)
     {
-        btc.exchange(av[1]);
+        try {
+            btc.exchange(av[1]);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << std::endl;
+            std::exit(EXIT_FAILURE);
+        }
     }
     else
     {
