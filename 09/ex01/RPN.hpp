@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:00:30 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/13 16:41:01 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:02:03 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class RPN
 {
 private:
     std::string str;
-    std::stack<double> stack;    
+    std::stack<double> stack;
 public:
     RPN();
     RPN(std::string str);

@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:55:08 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/13 16:44:52 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:56:43 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ double RPN::calculate()
             it--;
             stack.push(std::strtod(num_str.c_str(), NULL));
         }
-        else if (*it == '+' || *it == '-' || *it == '*' || *it == '/' || *it == '%')
+        else if (*it == '+' || *it == '-' || *it == '*' || *it == '/')
         {
             if (stack.size() < 2)
                 throw std::invalid_argument("Error");
@@ -78,12 +78,6 @@ double RPN::calculate()
                 if (a == 0)
                     throw std::invalid_argument("Error");
                 stack.push(b / a);
-            }
-            else if (*it == '%')
-            {
-                if (a == 0)
-                    throw std::invalid_argument("Error");
-                stack.push(static_cast<int>(b) % static_cast<int>(a));
             }
         }
         else
