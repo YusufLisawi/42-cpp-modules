@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:55:08 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/13 17:56:43 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/14 10:16:18 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 RPN::RPN() {
     // std::cout << "Constructor called for RPN"<< std::endl;
-    str = "";
 }
 
 RPN::RPN(std::string str) {
     // std::cout << "Constructor called for RPN"<< std::endl;
-    this->str = str;
+    this->result = this->calculate(str);
 }
 
 RPN::~RPN() {
@@ -35,12 +34,12 @@ RPN& RPN::operator=(const RPN& other) {
     // std::cout << "Assignment operator called for RPN" << std::endl;
     if (this != &other) {
         this->stack = other.stack;
-        this->str = other.str;
+        this->result = other.result;
     }
     return *this;
 }
 
-double RPN::calculate()
+double RPN::calculate(std::string str)
 {
     std::string::iterator it = str.begin();
 
@@ -86,4 +85,9 @@ double RPN::calculate()
     if (stack.size() != 1)
         throw std::invalid_argument("Error");
     return stack.top();
+}
+
+double RPN::getResult()
+{
+    return this->result;
 }
