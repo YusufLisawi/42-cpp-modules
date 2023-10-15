@@ -4,23 +4,28 @@
 #include <deque>
 #include <ctime>
 
-template <class T>
+template <class Container>
 class Sorting
 {
 private:
-    std::deque<T>   nums;
-    double          time;
+    Container   nums;
+    double      time;
 public:
-    Sorting<T>(char **argv);
-    ~Sorting<T>();
-    Sorting<T>(const Sorting& other);
-    Sorting<T>& operator=(const Sorting& other);
+    Sorting<Container>(char **argv);
+    ~Sorting<Container>();
+    Sorting<Container>(const Sorting& other);
+    Sorting<Container>& operator=(const Sorting& other);
 
-    std::deque<T> bubbel();
-    std::deque<T> insertion();
-    std::deque<T> merge();
+    Container bubbel();
+    Container insertion();
+    Container merge();
 
-    void    print(std::deque<T> nums);
+    typename Container::iterator binarySearch(Container& container, typename Container::value_type value);
+
+    void merger(typename Container::iterator begin, typename Container::iterator mid, typename Container::iterator end);
+    void mergeSort(Container& container, typename Container::iterator begin, typename Container::iterator end);
+
+    void    print(Container nums);
     double  getTime();
 };
 
