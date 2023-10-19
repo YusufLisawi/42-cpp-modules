@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 09:32:45 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/13 10:46:08 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:22:43 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int main(int ac, char **av)
 {
-    BitcoinExchange btc = BitcoinExchange("data.csv");
+  
 
-    if (ac == 2)
+    if (ac ==   BitcoinExchange btc = BitcoinExchange("data.csv");2)
     {
         try {
             btc.exchange(av[1]);
