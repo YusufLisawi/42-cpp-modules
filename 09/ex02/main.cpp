@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:15:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/19 20:52:01 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/19 21:03:22 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ void    printVector(PairVector collection)
         std::cout << "]";
     }
     std::cout << "]" << std::endl;
+}
+
+void flattenVector(IntVector collection, IntVector &toInsert)
+{
+    for (IntVector::iterator it = collection.begin(); it != collection.end(); ++it)
+    {
+        toInsert.push_back(*it);
+    }
 }
 
 int main(int ac, char **av)
@@ -59,8 +67,9 @@ int main(int ac, char **av)
             IntVector tmp_vec;
             if ((*it).back() > (*(it + 1)).back())
                 std::swap((*it), (*(it + 1)));
-            tmp_vec.push_back((*it).at(0));
-            tmp_vec.push_back((*(it + 1)).at(0));
+            
+            flattenVector(*it, tmp_vec);
+            flattenVector(*(it + 1), tmp_vec);
             tmp.push_back(tmp_vec);
             it++;
         }
@@ -69,9 +78,23 @@ int main(int ac, char **av)
     }
     collection = tmp;
     printVector(collection);
+    tmp.clear();
     for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
     {
-        std::cout << (*it).front() << " ";
-        std::cout << (*it).back() << " ";
+        if (it + 1 != collection.end())
+        {
+            IntVector tmp_vec;
+            if ((*it).back() > (*(it + 1)).back())
+                std::swap((*it), (*(it + 1)));
+            
+            flattenVector(*it, tmp_vec);
+            flattenVector(*(it + 1), tmp_vec);
+            tmp.push_back(tmp_vec);
+            it++;
+        }
+        else
+            rest.push_back(*it);
     }
+    collection = tmp;
+    printVector(collection);
 }
