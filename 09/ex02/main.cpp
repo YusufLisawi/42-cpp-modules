@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:15:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/19 21:03:22 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/20 02:06:48 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 typedef std::vector<int> IntVector;
 typedef std::vector<IntVector> PairVector;
 
-void    printVector(PairVector collection)
+bool compare(const IntVector& a, const IntVector& b)
+{
+    return (a.back() < b.back());
+}
+
+void printVector(PairVector collection)
 {
     std::cout << "[";
     for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
@@ -36,6 +41,99 @@ void flattenVector(IntVector collection, IntVector &toInsert)
     {
         toInsert.push_back(*it);
     }
+}
+
+void pairing(PairVector &collection, PairVector &remain)
+{
+    PairVector tmp;
+    for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
+    {
+        if (it + 1 != collection.end())
+        {
+            IntVector tmp_vec;
+            if ((*it).back() > (*(it + 1)).back())
+                std::swap((*it), (*(it + 1)));
+
+            flattenVector(*it, tmp_vec);
+            flattenVector(*(it + 1), tmp_vec);
+            tmp.push_back(tmp_vec);
+            it++;
+        }
+        else
+            remain.push_back(*it);
+    }
+    collection.clear();
+    collection = tmp;
+}
+
+void mergeInsertion(PairVector &collection, size_t size)
+{
+    PairVector remain;
+
+    if (collection.size() <= 3)
+        return;
+    if (collection.size() % 2 != 0)
+    {
+        remain.push_back(collection.back());
+        collection.pop_back();
+    }
+    
+    pairing(collection, remain);
+
+    std::cout << "collection > ";
+    printVector(collection);
+
+    std::cout << "remain > ";
+    printVector(remain);
+
+    mergeInsertion(collection, size * 2);
+
+    PairVector tmp;
+    for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
+    {
+        IntVector tmp_vec;
+        for (IntVector::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2)
+        {
+            tmp_vec.push_back(*it2);
+            if (tmp_vec.size() == 2)
+            {
+                tmp.push_back(tmp_vec);
+                tmp_vec.clear();
+            }
+        }
+    }
+    collection.clear();
+    // printVector(tmp);
+
+    PairVector mainchain;
+    PairVector pend;
+
+    for (PairVector::iterator it = tmp.begin(); it != tmp.end(); it += 2)
+    {
+        pend.push_back(*it);
+        if (it + 1 != tmp.end())
+            mainchain.push_back(*(it + 1));
+    }
+    tmp.clear();
+    for (PairVector::iterator it = remain.begin(); it != remain.end(); ++it)
+        pend.push_back(*it);
+   
+    std::cout << "mainchain > ";
+    printVector(mainchain);
+
+    std::cout << "pend > ";
+    printVector(pend);
+    
+    for (PairVector::iterator it = pend.begin(); it != pend.end(); ++it)
+    {
+        PairVector::iterator tmp_it = std::lower_bound(mainchain.begin(), mainchain.end(), *it, compare);
+        mainchain.insert(tmp_it, *it);
+    }
+    // for (PairVector::iterator it = mainchain.begin(); it != mainchain.end(); ++it)
+    //     collection.insert(collection.end(), it->begin(), it->end());
+    // collection = mainchain;
+    std::cout << "mainchain > ";
+    printVector(mainchain);
 }
 
 int main(int ac, char **av)
@@ -57,44 +155,5 @@ int main(int ac, char **av)
         collection.push_back(tmp_vec);
         i++;
     }
-    printVector(collection);
-    PairVector tmp;
-    PairVector rest;
-    for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
-    {
-        if (it + 1 != collection.end())
-        {
-            IntVector tmp_vec;
-            if ((*it).back() > (*(it + 1)).back())
-                std::swap((*it), (*(it + 1)));
-            
-            flattenVector(*it, tmp_vec);
-            flattenVector(*(it + 1), tmp_vec);
-            tmp.push_back(tmp_vec);
-            it++;
-        }
-        else
-            rest.push_back(*it);
-    }
-    collection = tmp;
-    printVector(collection);
-    tmp.clear();
-    for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
-    {
-        if (it + 1 != collection.end())
-        {
-            IntVector tmp_vec;
-            if ((*it).back() > (*(it + 1)).back())
-                std::swap((*it), (*(it + 1)));
-            
-            flattenVector(*it, tmp_vec);
-            flattenVector(*(it + 1), tmp_vec);
-            tmp.push_back(tmp_vec);
-            it++;
-        }
-        else
-            rest.push_back(*it);
-    }
-    collection = tmp;
-    printVector(collection);
+    mergeInsertion(collection, 1);
 }
