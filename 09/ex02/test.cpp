@@ -46,11 +46,6 @@ std::vector<int> Jacobsthal(int n)
 }
 void split_deque_into_pairs(std::deque<int>& d, size_t size)
 {
-    //print d 
-    // std::cout << "d : ";
-    // for (std::deque<int>::iterator it = d.begin(); it != d.end(); it++)
-    //     std::cout << *it << " ";
-    std::cout << "d.size :" << d.size() << std::endl;
     if (d.size() < size * 2)
         return;
     std::deque<std::pair<std::deque<int>, std::deque<int> > > pairs;
@@ -102,47 +97,54 @@ void split_deque_into_pairs(std::deque<int>& d, size_t size)
     }
     std::cout << "size : " << size << std::endl;
     split_deque_into_pairs(d, size * 2);
+    std::cout << "d : ";
+    for (std::deque<int>::iterator it = d.begin(); it != d.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << "tmp : ";
+    for (std::deque<int>::iterator it = tmp.begin(); it != tmp.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << std::endl;
     pairs.clear();
-    // std::deque<std::deque<int> > main_chain;
-    // std::deque<std::deque<int> > pend_chain;
-    // for (size_t i = 0; i < d.size(); i += size * 2)
-    // {
-    //     if (size > d.size() - i)
-    //     {
-    //         std::deque<int> first_deque;
-    //         std::deque<int> second_deque;
-    //         for (size_t j = i; j < d.size(); j++)
-    //         {
-    //             if (j < i + size)
-    //                 first_deque.push_back(d[j]);
-    //             else
-    //                 second_deque.push_back(d[j]);
-    //         }
-    //         pairs.push_back(std::make_pair(first_deque, second_deque));
-    //     }
-    //     else
-    //     {
-    //         std::deque<int> first_deque;
-    //         std::deque<int> second_deque;
-    //         for (size_t j = i; j < i + size; j++)
-    //             first_deque.push_back(d[j]);
-    //         for (size_t j = i + size; j < i + size * 2; j++)
-    //             second_deque.push_back(d[j]);
-    //         pairs.push_back(std::make_pair(first_deque, second_deque));
-    //     }
-    //     main_chain.push_back(pairs.back().second);
-    //     pend_chain.push_back(pairs.back().first);
-    // }
-    // if(!tmp.empty())
-    //     pend_chain.push_back(tmp);
-    // for (std::deque<std::deque<int> >::iterator p_it = pend_chain.begin(); p_it != pend_chain.end(); ++p_it)
-    // {
-    //     std::deque<std::deque<int> >::iterator it = std::lower_bound(main_chain.begin(), main_chain.end(), *p_it, Compare);
-    //     main_chain.insert(it, *p_it);
-    // }
-    // d.clear();
-    // for (std::deque<std::deque<int> >::iterator it = main_chain.begin(); it != main_chain.end(); ++it)
-    //     d.insert(d.end(), it->begin(), it->end());
+    std::deque<std::deque<int> > main_chain;
+    std::deque<std::deque<int> > pend_chain;
+    for (size_t i = 0; i < d.size(); i += size * 2)
+    {
+        if (size > d.size() - i)
+        {
+            std::deque<int> first_deque;
+            std::deque<int> second_deque;
+            for (size_t j = i; j < d.size(); j++)
+            {
+                if (j < i + size)
+                    first_deque.push_back(d[j]);
+                else
+                    second_deque.push_back(d[j]);
+            }
+            pairs.push_back(std::make_pair(first_deque, second_deque));
+        }
+        else
+        {
+            std::deque<int> first_deque;
+            std::deque<int> second_deque;
+            for (size_t j = i; j < i + size; j++)
+                first_deque.push_back(d[j]);
+            for (size_t j = i + size; j < i + size * 2; j++)
+                second_deque.push_back(d[j]);
+            pairs.push_back(std::make_pair(first_deque, second_deque));
+        }
+        main_chain.push_back(pairs.back().second);
+        pend_chain.push_back(pairs.back().first);
+    }
+    if(!tmp.empty())
+        pend_chain.push_back(tmp);
+    for (std::deque<std::deque<int> >::iterator p_it = pend_chain.begin(); p_it != pend_chain.end(); ++p_it)
+    {
+        std::deque<std::deque<int> >::iterator it = std::lower_bound(main_chain.begin(), main_chain.end(), *p_it, Compare);
+        main_chain.insert(it, *p_it);
+    }
+    d.clear();
+    for (std::deque<std::deque<int> >::iterator it = main_chain.begin(); it != main_chain.end(); ++it)
+        d.insert(d.end(), it->begin(), it->end());
 }
 
 
