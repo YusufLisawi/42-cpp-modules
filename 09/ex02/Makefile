@@ -1,12 +1,12 @@
 NAME = PmergeMe
 
-SRCS = main.cpp
+SRCS = main.cpp utils.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 CXX = c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-g -fsanitize=address
 
 all: $(NAME)
 

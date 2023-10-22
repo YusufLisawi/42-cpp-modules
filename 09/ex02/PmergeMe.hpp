@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:04 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/16 11:05:48 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/22 22:30:50 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 #include <iostream>
 #include <ctime>
-#include <vector>
+#include "utils.hpp"
 
 template <class Container>
-class PmergeMe 
+class PmergeMe
 {
 private:
     Container   collection;
