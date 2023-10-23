@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 22:22:03 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/22 22:36:57 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:25:20 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void printVector(IntVector collection)
 
 void printVector(PairVector collection)
 {
-    std::cout << "[";
+    // std::cout << "[";
     for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
     {
-        std::cout << "[";
+        // std::cout << "[";
         for (IntVector::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2)
-            std::cout << *it2 << ((it2 + 1 != (*it).end()) ? ", " : "");
-        std::cout << "]";
+            std::cout << *it2 << ((it2 + 1 != (*it).end()) ? "" : " ");
+        // std::cout << "]";
     }
-    // std::cout << std::endl;
-    std::cout << "]" << std::endl;
+    std::cout << std::endl;
+    // std::cout << "]" << std::endl;
 }
 
 void flattenVector(IntVector collection, IntVector &toInsert)
