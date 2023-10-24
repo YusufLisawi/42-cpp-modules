@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/23 19:12:59 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:22:06 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <algorithm>
 #include <functional>
 #include <cmath>
+
+int PmergeMe::comps = 0;
 
 PairVector  PmergeMe::createCollection(char **av)
 {
@@ -33,6 +35,10 @@ PairVector  PmergeMe::createCollection(char **av)
         i++;
     }
     return (collection);
+}
+
+PmergeMe::PmergeMe()
+{
 }
 
 PmergeMe::~PmergeMe()
@@ -64,7 +70,7 @@ std::vector<int> pending_element_indexes(int len) {
     seq.push_back(len);
 
     std::vector<int> result;
-    for (int i = 1; i < seq.size(); ++i) {
+    for (size_t i = 1; i < seq.size(); ++i) {
         for (int x = seq[i] - 1; x >= seq[i - 1]; --x) {
             result.push_back(x - 1);
         }
@@ -73,19 +79,19 @@ std::vector<int> pending_element_indexes(int len) {
     return result;
 }
 
-void binary_insert(std::vector<int>& a_positions, std::vector<int>& main_chain, std::vector<int>& pending_elements, int b_index, std::function<bool(int, int)> comp) {
-    int val = pending_elements[b_index];
-    std::vector<int> search_chain;
+void binary_insert(IntVector& a_positions, PairVector& main_chain, PairVector& pending_elements, size_t b_index) {
+    IntVector val = pending_elements[b_index];
+    PairVector search_chain;
     if (b_index < a_positions.size()) {
-        search_chain = std::vector<int>(main_chain.begin(), main_chain.begin() + a_positions[b_index]);
+        search_chain = PairVector(main_chain.begin(), main_chain.begin() + a_positions[b_index]);
     } else {
         search_chain = main_chain;
     }
 
-    std::vector<int>::iterator insertion_it = std::lower_bound(search_chain.begin(), search_chain.end(), val, comp);
+    PairVector::iterator insertion_it = std::lower_bound(search_chain.begin(), search_chain.end(), val, PmergeMe::compare);
 
     int insertion_idx = insertion_it - search_chain.begin();
-    for (int idx = 0; idx < a_positions.size(); ++idx) {
+    for (size_t idx = 0; idx < a_positions.size(); ++idx) {
         if (a_positions[idx] >= insertion_idx) {
             ++a_positions[idx];
         }
@@ -94,15 +100,15 @@ void binary_insert(std::vector<int>& a_positions, std::vector<int>& main_chain, 
     main_chain.insert(main_chain.begin() + insertion_idx, val);
 }
 
-void merge_insertion_sort(std::vector<int>& main_chain, std::vector<int>& pending_elements, std::function<bool(int, int)> comp) {
+void merge_insertion_sort(PairVector& main_chain, PairVector& pending_elements) {
     std::vector<int> a_positions(main_chain.size());
-    for (int i = 0; i < a_positions.size(); ++i) {
+    for (size_t i = 0; i < a_positions.size(); ++i) {
         a_positions[i] = i;
     }
 
     std::vector<int> pending_indexes = pending_element_indexes(pending_elements.size());
-    for (int b_index : pending_indexes) {
-        binary_insert(a_positions, main_chain, pending_elements, b_index, comp);
+    for (size_t b_index = 0; b_index < pending_indexes.size(); b_index++) {
+        binary_insert(a_positions, main_chain, pending_elements, pending_indexes[b_index]);
     }
 }
 
@@ -136,10 +142,15 @@ void PmergeMe::mergeInsertion(PairVector &collection)
 
 void    PmergeMe::binaryInsertion(PairVector &mainchain, PairVector &pend)
 {
+    if (pend.size() == 0)
+        return ;
     PairVector::iterator it = pend.begin();
-    PairVector::iterator main_it = mainchain.begin();
-    mainchain.insert(main_it, *it);
-    it++;
+    mainchain.insert(mainchain.begin(), *(it++));
+    if (pend.size() >= 2)
+    {
+        PairVector::iterator it2 = std::lower_bound(mainchain.begin(), mainchain.begin() + 2, *it, compare);
+        mainchain.insert(it2, *(it++));
+    }
     for (; it != pend.end(); ++it)
     {
         PairVector::iterator tmp_it = std::lower_bound(mainchain.begin(), mainchain.end(), *it, compare);
@@ -155,6 +166,7 @@ void PmergeMe::pairing(PairVector &collection, PairVector &remain)
         if (it + 1 != collection.end())
         {
             IntVector tmp_vec;
+            comps++;
             if ((*it).back() > (*(it + 1)).back())
                 std::swap((*it), (*(it + 1)));
 
@@ -194,5 +206,6 @@ void PmergeMe::splitPairs(PairVector &collection, size_t pairSize)
 
 bool PmergeMe::compare(const IntVector& a, const IntVector& b)
 {
+    comps++;
     return (a.back() < b.back());
 }
