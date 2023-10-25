@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 22:23:09 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/22 22:36:57 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:12:53 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,4 @@ typedef std::vector<IntVector> PairVector;
 void printVector(IntVector collection);
 void printVector(PairVector collection);
 void flattenVector(IntVector collection, IntVector &toInsert);
+int  jacobsthal(int n);

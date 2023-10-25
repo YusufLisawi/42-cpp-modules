@@ -6,12 +6,11 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/24 16:22:06 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/25 00:59:50 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-
 #include <vector>
 #include <algorithm>
 #include <functional>
@@ -52,31 +51,24 @@ PmergeMe::PmergeMe(const PmergeMe& other)
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 {
-    if (this != &other)
-    {
-    }
+    if (this != &other) {}
     return (*this);
 }
 
-std::vector<int> pending_element_indexes(int len) {
-    std::vector<int> seq;
-    for (int i = 0; i < len; ++i) {
-        int num = round((pow(2, i) + pow(-1, i - 1)) / 3);
-        if (num >= len) {
+IntVector pendIndexes(int len) {
+    IntVector   indexes;
+
+    for (int i = 3; i <= len; i++) {
+        int j = jacobsthal(i);
+
+        if (j >= len) {
+            indexes.push_back(len - 1);
             break;
         }
-        seq.push_back(num);
+        else
+            indexes.push_back(j);
     }
-    seq.push_back(len);
-
-    std::vector<int> result;
-    for (size_t i = 1; i < seq.size(); ++i) {
-        for (int x = seq[i] - 1; x >= seq[i - 1]; --x) {
-            result.push_back(x - 1);
-        }
-    }
-
-    return result;
+    return indexes;
 }
 
 void binary_insert(IntVector& a_positions, PairVector& main_chain, PairVector& pending_elements, size_t b_index) {
@@ -106,7 +98,7 @@ void merge_insertion_sort(PairVector& main_chain, PairVector& pending_elements) 
         a_positions[i] = i;
     }
 
-    std::vector<int> pending_indexes = pending_element_indexes(pending_elements.size());
+    std::vector<int> pending_indexes = pendIndexes(pending_elements.size());
     for (size_t b_index = 0; b_index < pending_indexes.size(); b_index++) {
         binary_insert(a_positions, main_chain, pending_elements, pending_indexes[b_index]);
     }
@@ -150,6 +142,26 @@ void    PmergeMe::binaryInsertion(PairVector &mainchain, PairVector &pend)
     {
         PairVector::iterator it2 = std::lower_bound(mainchain.begin(), mainchain.begin() + 2, *it, compare);
         mainchain.insert(it2, *(it++));
+    }
+    IntVector jacobIdx;
+    for (size_t i = 2; i < pend.size(); i++)
+    {
+        int j = jacobsthal(i);
+        jacobIdx.push_back(j);
+    }
+    for (size_t i = 0; i < jacobIdx.size(); i++)
+    {
+        if (jacobIdx[i] >= (int)pend.size())
+            jacobIdx[i] = pend.size() - 1;
+        size_t begin = jacobIdx[i];
+        // size_t move = jacobIdx[i];
+        size_t end = jacobIdx[i - 1];
+        for (size_t j = begin; j > end; j--)
+        {
+            PairVector::iterator tmp_it = std::lower_bound(mainchain.begin(), mainchain.end(), pend[j], compare);
+            mainchain.insert(tmp_it, pend[j]);
+            pend.erase(pend.begin() + j);
+        }
     }
     for (; it != pend.end(); ++it)
     {

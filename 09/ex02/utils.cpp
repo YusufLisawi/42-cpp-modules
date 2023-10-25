@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 22:22:03 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/23 18:25:20 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:12:44 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,13 @@ void flattenVector(IntVector collection, IntVector &toInsert)
     {
         toInsert.push_back(*it);
     }
+}
+
+int jacobsthal(int n)
+{
+    if (n == 0)
+        return (0);
+    if (n == 1)
+        return (1);
+    return (jacobsthal(n - 1) + 2 * jacobsthal(n - 2));
 }
