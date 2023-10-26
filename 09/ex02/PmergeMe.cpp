@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/25 19:52:48 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:21:22 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,55 +55,6 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
     return (*this);
 }
 
-IntVector pendIndexes(int len) {
-    IntVector   indexes;
-
-    for (int i = 3; i <= len; i++) {
-        int j = jacobsthal(i);
-
-        if (j >= len) {
-            indexes.push_back(len - 1);
-            break;
-        }
-        else
-            indexes.push_back(j);
-    }
-    return indexes;
-}
-
-void binary_insert(IntVector& a_positions, PairVector& main_chain, PairVector& pending_elements, size_t b_index) {
-    IntVector val = pending_elements[b_index];
-    PairVector search_chain;
-    if (b_index < a_positions.size()) {
-        search_chain = PairVector(main_chain.begin(), main_chain.begin() + a_positions[b_index]);
-    } else {
-        search_chain = main_chain;
-    }
-
-    PairVector::iterator insertion_it = std::lower_bound(search_chain.begin(), search_chain.end(), val, PmergeMe::compare);
-
-    int insertion_idx = insertion_it - search_chain.begin();
-    for (size_t idx = 0; idx < a_positions.size(); ++idx) {
-        if (a_positions[idx] >= insertion_idx) {
-            ++a_positions[idx];
-        }
-    }
-
-    main_chain.insert(main_chain.begin() + insertion_idx, val);
-}
-
-void merge_insertion_sort(PairVector& main_chain, PairVector& pending_elements) {
-    std::vector<int> a_positions(main_chain.size());
-    for (size_t i = 0; i < a_positions.size(); ++i) {
-        a_positions[i] = i;
-    }
-
-    std::vector<int> pending_indexes = pendIndexes(pending_elements.size());
-    for (size_t b_index = 0; b_index < pending_indexes.size(); b_index++) {
-        binary_insert(a_positions, main_chain, pending_elements, pending_indexes[b_index]);
-    }
-}
-
 void PmergeMe::mergeInsertion(PairVector &collection)
 {
     PairVector remain;
@@ -132,41 +83,59 @@ void PmergeMe::mergeInsertion(PairVector &collection)
     collection = mainchain;
 }
 
+IntVector   jacobSequence(size_t len)
+{
+    IntVector seq;
+    for (size_t i = 0; i < len; ++i)
+    {
+        size_t j = jacobsthal(i);
+        if (j >= len) {
+            break; 
+        }
+        seq.push_back(j);
+    }
+    seq.push_back(len);
+
+    std::vector<int> result;
+    for (int i = 1; i < (int)seq.size(); ++i)
+    {
+        for (int x = seq[i]; x > seq[i - 1]; --x)
+            result.push_back(x - 1);
+    }
+
+    return result;
+}
+
 void    PmergeMe::binaryInsertion(PairVector &mainchain, PairVector &pend)
 {
-    if (pend.size() == 0)
-        return ;
-    PairVector::iterator it = pend.begin();
-    mainchain.insert(mainchain.begin(), *(it++));
-    if (pend.size() >= 2)
+    std::vector<int> aPositions;
+    for (PairVector::iterator it = mainchain.begin(); it != mainchain.end(); ++it)
     {
-        PairVector::iterator it2 = std::lower_bound(mainchain.begin(), mainchain.begin() + 2, *it, compare);
-        mainchain.insert(it2, *(it++));
+        int distance = static_cast<int>(std::distance(mainchain.begin(), it));
+        aPositions.push_back(distance);
     }
-    IntVector jacobIdx;
-    for (size_t i = 2; i < pend.size(); i++)
+    IntVector jacobs = jacobSequence(pend.size());
+    for (std::vector<int>::iterator it = jacobs.begin(); it != jacobs.end(); ++it)
     {
-        int j = jacobsthal(i);
-        jacobIdx.push_back(j);
-    }
-    for (size_t i = 0; i < jacobIdx.size(); i++)
-    {
-        if (jacobIdx[i] >= (int)pend.size())
-            jacobIdx[i] = pend.size() - 1;
-        size_t begin = jacobIdx[i];
-        // size_t move = jacobIdx[i];
-        size_t end = jacobIdx[i - 1];
-        for (size_t j = begin; j > end; j--)
+        int bIdx = *it;
+
+        IntVector val = pend.at(bIdx);
+        PairVector searchChain;
+        if (bIdx < (int)aPositions.size())
+            searchChain = PairVector(mainchain.begin(), mainchain.begin() + aPositions[bIdx]);
+        else
+            searchChain = mainchain;
+
+        PairVector::iterator insertion_it = std::lower_bound(searchChain.begin(), searchChain.end(), val, compare);
+        int insertion_idx = insertion_it - searchChain.begin();
+
+        for (IntVector::iterator it = aPositions.begin(); it != aPositions.end(); ++it)
         {
-            PairVector::iterator tmp_it = std::lower_bound(mainchain.begin(), mainchain.end(), pend[j], compare);
-            mainchain.insert(tmp_it, pend[j]);
-            pend.erase(pend.begin() + j);
+            if (*it >= insertion_idx)
+                *it += 1;
         }
-    }
-    for (; it != pend.end(); ++it)
-    {
-        PairVector::iterator tmp_it = std::lower_bound(mainchain.begin(), mainchain.end(), *it, compare);
-        mainchain.insert(tmp_it, *it);
+
+        mainchain.insert(mainchain.begin() + insertion_idx, val);
     }
 }
 
@@ -180,7 +149,7 @@ void PmergeMe::pairing(PairVector &collection, PairVector &remain)
             IntVector tmp_vec;
             comps++;
             if ((*it).back() > (*(it + 1)).back())
-                std::swap((*it), (*(it + 1)));
+                swap((*it), (*(it + 1)));
 
             flattenVector(*it, tmp_vec);
             flattenVector(*(it + 1), tmp_vec);
