@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 00:21:22 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:30:13 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 int PmergeMe::comps = 0;
 
-PairVector  PmergeMe::createCollection(char **av)
+DoubleVector  PmergeMe::createCollection(char **av)
 {
-    PairVector collection;
+    DoubleVector collection;
     
     int i = 1;
     while (av[i])
@@ -55,11 +55,11 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
     return (*this);
 }
 
-void PmergeMe::mergeInsertion(PairVector &collection)
+void PmergeMe::mergeInsertion(DoubleVector &collection)
 {
-    PairVector remain;
-    PairVector mainchain;
-    PairVector pend;
+    DoubleVector remain;
+    DoubleVector mainchain;
+    DoubleVector pend;
 
     if (collection.size() == 1)
         return; 
@@ -71,62 +71,39 @@ void PmergeMe::mergeInsertion(PairVector &collection)
     pairing(collection, remain);
     mergeInsertion(collection);
     splitPairs(collection, collection.at(0).size() / 2);
-    for (PairVector::iterator it = collection.begin(); it != collection.end(); it += 2)
+    for (DoubleVector::iterator it = collection.begin(); it != collection.end(); it += 2)
     {
         pend.push_back(*it);
         if (it + 1 != collection.end())
             mainchain.push_back(*(it + 1));
     }
-    for (PairVector::iterator it = remain.begin(); it != remain.end(); ++it)
+    for (DoubleVector::iterator it = remain.begin(); it != remain.end(); ++it)
         pend.push_back(*it);
     binaryInsertion(mainchain, pend);
     collection = mainchain;
 }
 
-IntVector   jacobSequence(size_t len)
+void    PmergeMe::binaryInsertion(DoubleVector &mainchain, DoubleVector &pend)
 {
-    IntVector seq;
-    for (size_t i = 0; i < len; ++i)
-    {
-        size_t j = jacobsthal(i);
-        if (j >= len) {
-            break; 
-        }
-        seq.push_back(j);
-    }
-    seq.push_back(len);
-
-    std::vector<int> result;
-    for (int i = 1; i < (int)seq.size(); ++i)
-    {
-        for (int x = seq[i]; x > seq[i - 1]; --x)
-            result.push_back(x - 1);
-    }
-
-    return result;
-}
-
-void    PmergeMe::binaryInsertion(PairVector &mainchain, PairVector &pend)
-{
-    std::vector<int> aPositions;
-    for (PairVector::iterator it = mainchain.begin(); it != mainchain.end(); ++it)
+    IntVector aPositions;
+    for (DoubleVector::iterator it = mainchain.begin(); it != mainchain.end(); ++it)
     {
         int distance = static_cast<int>(std::distance(mainchain.begin(), it));
         aPositions.push_back(distance);
     }
     IntVector jacobs = jacobSequence(pend.size());
-    for (std::vector<int>::iterator it = jacobs.begin(); it != jacobs.end(); ++it)
+    for (IntVector::iterator it = jacobs.begin(); it != jacobs.end(); ++it)
     {
         int bIdx = *it;
 
         IntVector val = pend.at(bIdx);
-        PairVector searchChain;
+        DoubleVector searchChain;
         if (bIdx < (int)aPositions.size())
-            searchChain = PairVector(mainchain.begin(), mainchain.begin() + aPositions[bIdx]);
+            searchChain = DoubleVector(mainchain.begin(), mainchain.begin() + aPositions[bIdx]);
         else
             searchChain = mainchain;
 
-        PairVector::iterator insertion_it = std::lower_bound(searchChain.begin(), searchChain.end(), val, compare);
+        DoubleVector::iterator insertion_it = std::lower_bound(searchChain.begin(), searchChain.end(), val, compare);
         int insertion_idx = insertion_it - searchChain.begin();
 
         for (IntVector::iterator it = aPositions.begin(); it != aPositions.end(); ++it)
@@ -139,10 +116,10 @@ void    PmergeMe::binaryInsertion(PairVector &mainchain, PairVector &pend)
     }
 }
 
-void PmergeMe::pairing(PairVector &collection, PairVector &remain)
+void PmergeMe::pairing(DoubleVector &collection, DoubleVector &remain)
 {
-    PairVector tmp;
-    for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
+    DoubleVector tmp;
+    for (DoubleVector::iterator it = collection.begin(); it != collection.end(); ++it)
     {
         if (it + 1 != collection.end())
         {
@@ -162,10 +139,10 @@ void PmergeMe::pairing(PairVector &collection, PairVector &remain)
     collection = tmp;
 }
 
-void PmergeMe::splitPairs(PairVector &collection, size_t pairSize)
+void PmergeMe::splitPairs(DoubleVector &collection, size_t pairSize)
 {
-    PairVector tmp;
-    for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
+    DoubleVector tmp;
+    for (DoubleVector::iterator it = collection.begin(); it != collection.end(); ++it)
     {
         IntVector subVec;
         for (IntVector::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2)

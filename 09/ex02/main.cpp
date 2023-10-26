@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:15:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/24 14:34:53 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:30:13 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av)
 
     try
     {
-        PairVector collection = PmergeMe::createCollection(av);
+        DoubleVector collection = PmergeMe::createCollection(av);
 
         std::cout << "Before: ";
         printVector(collection);

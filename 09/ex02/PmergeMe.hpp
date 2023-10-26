@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:04 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/23 19:13:52 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:30:13 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ private:
     PmergeMe& operator=(const PmergeMe& other); 
 public:
     static int          comps;
-    static void        mergeInsertion(PairVector &collection);
-    static PairVector  createCollection(char **av);
-    static void        binaryInsertion(PairVector &mainchain, PairVector &pend);
-    static void        pairing(PairVector &collection, PairVector &remain);
-    static void        splitPairs(PairVector &collection, size_t pairSize);
+    static void        mergeInsertion(DoubleVector &collection);
+    static DoubleVector  createCollection(char **av);
+    static void        binaryInsertion(DoubleVector &mainchain, DoubleVector &pend);
+    static void        pairing(DoubleVector &collection, DoubleVector &remain);
+    static void        splitPairs(DoubleVector &collection, size_t pairSize);
     static bool        compare(const IntVector& a, const IntVector& b);
 };

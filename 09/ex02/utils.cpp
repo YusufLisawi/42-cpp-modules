@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 22:22:03 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/26 22:42:41 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:30:13 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void printVector(IntVector collection)
     std::cout << "]" << std::endl;
 }
 
-void printVector(PairVector collection)
+void printVector(DoubleVector collection)
 {
     // std::cout << "[";
-    for (PairVector::iterator it = collection.begin(); it != collection.end(); ++it)
+    for (DoubleVector::iterator it = collection.begin(); it != collection.end(); ++it)
     {
         // std::cout << "[";
         for (IntVector::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2)
@@ -51,4 +51,27 @@ int jacobsthal(int n)
     if (n == 1)
         return (1);
     return (jacobsthal(n - 1) + 2 * jacobsthal(n - 2));
+}
+
+IntVector   jacobSequence(size_t len)
+{
+    IntVector seq;
+    for (size_t i = 0; i < len; ++i)
+    {
+        size_t j = jacobsthal(i);
+        if (j >= len) {
+            break; 
+        }
+        seq.push_back(j);
+    }
+    seq.push_back(len);
+
+    std::vector<int> result;
+    for (int i = 1; i < (int)seq.size(); ++i)
+    {
+        for (int x = seq[i]; x > seq[i - 1]; --x)
+            result.push_back(x - 1);
+    }
+
+    return result;
 }
