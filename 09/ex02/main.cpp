@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:15:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 00:30:13 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:00:30 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int ac, char **av)
         printVector(collection);
 
         std::cout << "Time to process a range of " << ac - 1 << " elements with std::vector : " << (float)(end_time - start_time) * 1000000 / CLOCKS_PER_SEC << " us" << std::endl;
-        std::cout << "Number of comparisons: " << PmergeMe::comps << std::endl;
+        std::cout << "Number of comparisons: " << PmergeMe::getComps() << std::endl;
     }
     catch (std::exception &e)
     {

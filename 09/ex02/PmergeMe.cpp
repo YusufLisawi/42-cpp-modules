@@ -6,15 +6,11 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 00:30:13 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:06:04 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <vector>
-#include <algorithm>
-#include <functional>
-#include <cmath>
 
 int PmergeMe::comps = 0;
 
@@ -88,7 +84,7 @@ void    PmergeMe::binaryInsertion(DoubleVector &mainchain, DoubleVector &pend)
     IntVector aPositions;
     for (DoubleVector::iterator it = mainchain.begin(); it != mainchain.end(); ++it)
     {
-        int distance = static_cast<int>(std::distance(mainchain.begin(), it));
+        int distance = std::distance(mainchain.begin(), it);
         aPositions.push_back(distance);
     }
     IntVector jacobs = jacobSequence(pend.size());
@@ -104,7 +100,7 @@ void    PmergeMe::binaryInsertion(DoubleVector &mainchain, DoubleVector &pend)
             searchChain = mainchain;
 
         DoubleVector::iterator insertion_it = std::lower_bound(searchChain.begin(), searchChain.end(), val, compare);
-        int insertion_idx = insertion_it - searchChain.begin();
+        int insertion_idx = std::distance(searchChain.begin(), insertion_it);
 
         for (IntVector::iterator it = aPositions.begin(); it != aPositions.end(); ++it)
         {
@@ -166,4 +162,9 @@ bool PmergeMe::compare(const IntVector& a, const IntVector& b)
 {
     comps++;
     return (a.back() < b.back());
+}
+
+int PmergeMe::getComps()
+{
+    return (comps);
 }
