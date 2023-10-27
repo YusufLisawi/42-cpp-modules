@@ -1,6 +1,6 @@
 NAME = PmergeMe
 
-SRCS = main.cpp PmergeMe.cpp
+SRCS = main.cpp PmergeMe.cpp DmergeMe.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

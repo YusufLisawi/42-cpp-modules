@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 12:28:26 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:26:11 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,34 +82,30 @@ void PmergeMe::mergeInsertion(DoubleVector &collection)
 
 void    PmergeMe::binaryInsertion(DoubleVector &mainchain, DoubleVector &pend)
 {
-    IntVector aPositions;
+    IntVector mainIdxs;
+    int i = 0;
     for (DoubleVector::iterator it = mainchain.begin(); it != mainchain.end(); ++it)
-    {
-        int distance = std::distance(mainchain.begin(), it);
-        aPositions.push_back(distance);
-    }
+        mainIdxs.push_back(i++);
+    
     IntVector jacobs = jacobSequence<IntVector>(pend.size());
     for (IntVector::iterator it = jacobs.begin(); it != jacobs.end(); ++it)
     {
-        int bIdx = *it;
+        int pendIdx = *it;
 
-        IntVector val = pend.at(bIdx);
-        DoubleVector searchChain;
-        if (bIdx < (int)aPositions.size())
-            searchChain = DoubleVector(mainchain.begin(), mainchain.begin() + aPositions[bIdx]);
+        IntVector val = pend.at(pendIdx);
+        DoubleVector::iterator insertion_it;;
+        if (pendIdx < (int)mainIdxs.size())
+            insertion_it = std::lower_bound(mainchain.begin(), mainchain.begin() + mainIdxs[pendIdx], val, compare);
         else
-            searchChain = mainchain;
+            insertion_it = std::lower_bound(mainchain.begin(), mainchain.end(), val, compare);
 
-        DoubleVector::iterator insertion_it = std::lower_bound(searchChain.begin(), searchChain.end(), val, compare);
-        int insertion_idx = std::distance(searchChain.begin(), insertion_it);
-
-        for (IntVector::iterator it = aPositions.begin(); it != aPositions.end(); ++it)
+        int insertion_idx = std::distance(mainchain.begin(), insertion_it);
+        for (IntVector::iterator it = mainIdxs.begin(); it != mainIdxs.end(); ++it)
         {
             if (*it >= insertion_idx)
                 *it += 1;
         }
-
-        mainchain.insert(mainchain.begin() + insertion_idx, val);
+        mainchain.insert(insertion_it, val);
     }
 }
 
@@ -125,8 +121,8 @@ void PmergeMe::pairing(DoubleVector &collection, DoubleVector &remain)
             if ((*it).back() > (*(it + 1)).back())
                 swap((*it), (*(it + 1)));
 
-            flattenVector(*it, tmp_vec);
-            flattenVector(*(it + 1), tmp_vec);
+            flattenContainer(*it, tmp_vec);
+            flattenContainer(*(it + 1), tmp_vec);
             tmp.push_back(tmp_vec);
             it++;
         }

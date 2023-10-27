@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 22:23:09 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 12:32:12 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:36:44 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void printContainer(T collection)
 }
 
 template <typename T>
-void flattenVector(T collection, T &toInsert)
+void flattenContainer(T collection, T &toInsert)
 {
     for (typename T::iterator it = collection.begin(); it != collection.end(); ++it)
         toInsert.push_back(*it);
