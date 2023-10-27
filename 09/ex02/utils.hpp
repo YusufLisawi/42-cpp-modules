@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 22:23:09 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 11:36:43 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:32:12 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <vector>
 #include <deque>
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 
 typedef std::vector<int> IntVector;
 typedef std::vector<IntVector> DoubleVector;
@@ -50,8 +50,29 @@ void flattenVector(T collection, T &toInsert)
         toInsert.push_back(*it);
 }
 
-int         jacobsthal(int n);
-IntVector   jacobSequence(size_t len);
+template <typename T>
+T   jacobSequence(size_t len)
+{
+    T seq;
+    for (size_t i = 0; i < len; ++i)
+    {
+        size_t j = (pow(2, i) + pow(-1, i - 1)) / 3;
+        if (j >= len) {
+            break; 
+        }
+        seq.push_back(j);
+    }
+    seq.push_back(len);
+
+    T result;
+    for (int i = 1; i < (int)seq.size(); ++i)
+    {
+        for (int x = seq[i]; x > seq[i - 1]; --x)
+            result.push_back(x - 1);
+    }
+
+    return result;
+}
 
 template <typename T>
 void swap(T &a, T &b)

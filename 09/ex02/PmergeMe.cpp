@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:18:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 11:06:04 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:28:26 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ DoubleVector  PmergeMe::createCollection(char **av)
     int i = 1;
     while (av[i])
     {
-        int tmp = std::atoi(av[i]);
-        if (tmp < 0 || tmp < INT_MIN || tmp > INT_MAX)
+        char *end;
+        int tmp = std::strtod(av[i], &end);
+        if (*end != '\0' || tmp < 0 || tmp < INT_MIN || tmp > INT_MAX)
             throw std::invalid_argument("Invalid argument " + std::string(av[i]));
         IntVector tmp_vec;
         tmp_vec.push_back(tmp);
@@ -87,7 +88,7 @@ void    PmergeMe::binaryInsertion(DoubleVector &mainchain, DoubleVector &pend)
         int distance = std::distance(mainchain.begin(), it);
         aPositions.push_back(distance);
     }
-    IntVector jacobs = jacobSequence(pend.size());
+    IntVector jacobs = jacobSequence<IntVector>(pend.size());
     for (IntVector::iterator it = jacobs.begin(); it != jacobs.end(); ++it)
     {
         int bIdx = *it;
