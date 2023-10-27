@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:15:38 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/27 14:50:19 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:13:09 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,23 @@ int main(int ac, char **av)
         std::cout << "Before: ";
         printContainer(collectionV);
 
-        clock_t start_time = clock();
+        clock_t start_timeV = clock();
         PmergeMe::mergeInsertion(collectionV);
-        clock_t end_time = clock();
+        clock_t end_timeV = clock();
 
         std::cout << "After: ";
         printContainer(collectionV);
 
-        std::cout << "Time to process a range of " << ac - 1 << " elements with std::vector : " << (float)(end_time - start_time) * 1000000 / CLOCKS_PER_SEC << " us" << std::endl;
-        std::cout << "Number of comparisons: " << PmergeMe::getComps() << std::endl;
-        std::cout << "------------------------------" << std::endl;
         // Deque
         DoubleDeque collectionD = DmergeMe::createCollection(av);
 
-        std::cout << "Before: ";
-        printContainer(collectionD);
-
-        start_time = clock();
+        clock_t start_timeD = clock();
         DmergeMe::mergeInsertion(collectionD);
-        end_time = clock();
+        clock_t end_timeD = clock();
 
-        std::cout << "After: ";
-        printContainer(collectionD);
-
-        std::cout << "Time to process a range of " << ac - 1 << " elements with std::deque : " << (float)(end_time - start_time) * 1000000 / CLOCKS_PER_SEC << " us" << std::endl;
-        std::cout << "Number of comparisons: " << DmergeMe::getComps() << std::endl;
+        std::cout << "Time to process a range of " << ac - 1 << " elements with std::vector : " << (float)(end_timeV - start_timeV) * 1000000 / CLOCKS_PER_SEC << " us" << std::endl;
+        std::cout << "Time to process a range of " << ac - 1 << " elements with std::deque : " << (float)(end_timeD - start_timeD) * 1000000 / CLOCKS_PER_SEC << " us" << std::endl;
+        // std::cout << "Number of comparisons: " << DmergeMe::getComps() << std::endl;
     }
     catch (std::exception &e)
     {

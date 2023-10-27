@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:55:08 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/10/14 10:16:18 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:57:15 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ double RPN::calculate(std::string str)
     {
         if (*it == ' ')
             continue;
-        if (*it >= '0' && *it <= '9')
+        if (std::isdigit(*it))
         {
             std::string num_str = "";
-            while (*it >= '0' && *it <= '9')
+            while (std::isdigit(*it))
             {
                 num_str += *it;
                 it++;
